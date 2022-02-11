@@ -146,6 +146,7 @@ const Header = () => {
 
 
                   <Button variant="contained" className={`${styles.btn_primary} ${styles.btn_md}`}
+>
                     Register
                   </Button>
 
