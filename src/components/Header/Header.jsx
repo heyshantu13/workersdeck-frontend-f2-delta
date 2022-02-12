@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {
   AppBar,
   Box,
@@ -33,8 +33,13 @@ const lightTheme = createTheme({
 
 
 const Header = () => {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [loading,setLoading] = useState(true);
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
+
+    useEffect(() =>{
+      setLoading(false)
+    },[]);
 
       const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
