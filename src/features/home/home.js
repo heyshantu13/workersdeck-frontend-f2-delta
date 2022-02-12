@@ -8,6 +8,7 @@ import {
   MenuItem,
   TextField,
   Card,
+  Button,
 } from "@mui/material/";
 import ServiceCard from "../../components/Card/ServiceCard";
 import ServiceList from "../../constants/services";
@@ -61,15 +62,20 @@ const Home = () => {
               backgroundColor: "rgba(45, 45, 45, 0.55)",
             }}
           >
-            {/* Select City,Zipcode and Service */}
+          </Box>
+        </Grid>
+                    {/* Select City,Zipcode and Service */}
+          <Grid item xs={12} sm={12} md={12} lg={12}>
             <form onSubmit={handleSubmit}>
               <Grid
                 container
                 direction="row"
                 justifyContent="center"
                 alignItems="center"
+                className = {styles.form_position}
+                spacing={1}
               >
-                <Grid sm={12} xs={12} md={2} lg={2} item>
+                <Grid sm={12} xs={12} md={2} lg={2} mr={1} item>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
                       Select City
@@ -80,7 +86,7 @@ const Home = () => {
                       value={form.city}
                       label="Select City"
                       name={"city"}
-                      classname={styles.wd_select}
+                      className={classes.wd_select}
                       required
                       onChange={handleChange}
                     >
@@ -93,7 +99,7 @@ const Home = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid sm={12} xs={12} md={2} lg={2} item>
+                <Grid sm={12} xs={12} md={2} lg={2}  mr={1}  item>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
                       Select Category
@@ -105,6 +111,7 @@ const Home = () => {
                       label="Select Category"
                       name={"category_id"}
                       onChange={handleChange}
+                      className={classes.wd_select}
                       required
                     >
                       {ServiceList.map((serviceObj) => (
@@ -115,8 +122,8 @@ const Home = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid sm={12} xs={12} md={2} lg={2} item>
-                  <FormControl fullWidth className="pin-box">
+                <Grid sm={12} xs={12} md={2} lg={2}  mr={1} item>
+                  <FormControl fullWidth >
                     <TextField
                       id="outlined-basic"
                       label="Pin Code"
@@ -126,6 +133,7 @@ const Home = () => {
                       maxLength={6}
                       required
                       onChange={handleChange}
+                      className={classes.wd_select}
                       onKeyPress={(event) => {
                         if (!/[0-9]/.test(event.key)) {
                           event.preventDefault();
@@ -134,20 +142,26 @@ const Home = () => {
                     />
                   </FormControl>
                 </Grid>
+                <Grid sm={12} xs={12} md={2} lg={1}  mr={1} item>
+                <Button variant="contained" className={`${classes.wd_go_btn} ${styles.btn_align}`} >Go</Button>
+                </Grid>
               </Grid>
             </form>
-            {/* End Select City,Zipcode and Service */}
-          </Box>
-        </Grid>
-        {/* Service Card Start */}
-        <Grid item xs={4} sm={4} md={12} lg={12}>
-          <Grid container direction="row" justifyContent="center" alignItems="center">
-          <Card >
-          <Grid container >
-                {ServiceList.map((serviceObj) => getServiceCard(serviceObj))}
-              </Grid>
-          </Card>
           </Grid>
+            {/* End Select City,Zipcode and Service */}
+        {/* Service Card Start */}
+        <Grid  xs={12} sm={12} md={12} lg={12}  
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center">
+         <Grid item >
+         <Card className={classes.wd_service_card}>
+            <Grid container >
+                  {ServiceList.map((serviceObj) => getServiceCard(serviceObj))}
+                </Grid>
+        </Card>
+         </Grid>
         </Grid>
         {/* Service Card End */}
       </Grid>
