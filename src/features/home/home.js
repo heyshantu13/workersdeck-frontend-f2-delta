@@ -97,8 +97,8 @@ const Home = () => {
         {/* Home page top banner */}
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Box
-              sx={{ height: "600px" }}
-              lg={{ height: "600px" }}
+              sx={{ height: "580px" }}
+              lg={{ height: "580px" }}
               style={{
                 backgroundImage: `url(${banner})`,
                 backgroundSize: "cover",

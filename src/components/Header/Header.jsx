@@ -14,7 +14,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink,Link, useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
-const pages = ["Home", "Register As Worker"];
+import LoadingBar from 'react-top-loading-bar';
 
 const lightTheme = createTheme({
   palette: {
@@ -32,31 +32,30 @@ const lightTheme = createTheme({
 });
 
 const Header = () => {
-  const [loading, setLoading] = useState(true);
+  const pages = ["Home", "Register As Worker"];
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
+  const [progress, setProgress] = useState(0);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  useEffect(() => {
+    setProgress(100);
+  }, []);
 
   return (
     <>
+    <LoadingBar
+    color='#3f51b5'
+    progress={progress}
+    onLoaderFinished={() => setProgress(0)}
+    height={"4px"}
+  />
       <ThemeProvider theme={lightTheme}>
         <AppBar position="static" color="primary">
           <Container maxWidth="xl">
