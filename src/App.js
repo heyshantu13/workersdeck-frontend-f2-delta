@@ -15,12 +15,12 @@ import Signup from "./features/signup/signup";
 function App() {
   return (
     <>
-    <Header/>
     <BrowserRouter>
+    <Header/>
       <Routes>
-         <Route exact path="/" element={<Home />} />
-         <Route exact path="/login" element={<Login />} />
-         <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/register" element={<Signup />} />
       </Routes>
     </BrowserRouter>
     </>

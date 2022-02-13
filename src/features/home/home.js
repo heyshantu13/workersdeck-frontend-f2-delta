@@ -214,8 +214,8 @@ const Home = () => {
           </Grid>
         {/* Service Card End */}
         {/* Offer Area */}
-        <Grid sm={12} xs={12} md={12} lg={12} item>
-          <Card  className={classes.wd_offer_card} mt={1}>
+        <Grid sm={12} xs={12} md={12} lg={12} item mt={1}>
+          <Card  className={classes.wd_offer_card} >
             <Grid item container>
             <Grid sm={12} xs={12} md={8} lg={8} item>
             <h3 className={classes.offetTextOne}>

@@ -6,7 +6,7 @@ import {
   Button,
   Typography,
 } from "@mui/material/";
-import styles from "./signup.module.css";
+import styles from "../../assets/main.module.css";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
 
