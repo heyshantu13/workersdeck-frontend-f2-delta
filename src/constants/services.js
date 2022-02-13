@@ -22,7 +22,7 @@ export default [
     },
     {
       id: 5,
-      title: "Cleaning Service",
+      title: "Cleaning",
       image: "https://i.ibb.co/Dr16h42/broom.png"
     }
   ];

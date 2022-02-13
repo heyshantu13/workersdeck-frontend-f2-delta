@@ -16,6 +16,15 @@ const customStyle = makeStyles({
       },
       wd_service_card:{
           marginTop: '-2rem',
+          boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04)',
+          borderRadius: '12px',
+          maxWidth:'96rem',
+      },
+      wd_offer_card:{
+        background: '#3F51B5',
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        borderRadius: '2px',
+        height: '415px',
       }
 
 });
