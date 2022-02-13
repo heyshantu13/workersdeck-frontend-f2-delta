@@ -2,15 +2,30 @@ import { makeStyles } from '@mui/styles';
 
 const customStyle = makeStyles({
 
-    root: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-        border: 0,
-        borderRadius: 3,
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-        color: 'white',
-        height: 48,
-        padding: '0 30px',
+      wd_select:{
+        background: '#FFFFFF',
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        borderRadius: '8px',
       },
+      wd_go_btn:{
+        width: '120px',
+        height: '52px',
+        background: '#2D3748',
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        borderRadius: '8px'
+      },
+      wd_service_card:{
+          marginTop: '-2rem',
+          boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04)',
+          borderRadius: '12px',
+          maxWidth:'96rem',
+      },
+      wd_offer_card:{
+        background: '#3F51B5',
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        borderRadius: '2px',
+        height: '415px',
+      }
 
 });
 
