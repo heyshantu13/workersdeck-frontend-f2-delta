@@ -5,30 +5,74 @@ import {
   TextField,
   Button,
   Typography,
+  CircularProgress,
 } from "@mui/material/";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "./loginSlice";
+import { clearMessage } from "../message/messageSlice";
 import styles from "../../assets/main.module.css";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
+import muiStyle from "../../assets/mui_style";
 
 const Login = () => {
   
   const classes = customStyle();
+  const dispatch = useDispatch();
+  const muistyle = muiStyle();
 
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
-    passwordError: "",
-    emailError: "",
   });
 
   const [valid, setValid] = useState({
     email: true,
     password: true,
-    disableButton: true,
+    disableButton: false,
+    auth : true,
+    passwordError: "",
+    emailError: "",
+    authError: "",
   });
 
+  const  [bntloading, setBtnloading ] = useState(false);
+
+
   const handleSubmit = (e) => {
-    e.preventDefault();
+    const {email, password} =  inputs;
+    if(valid.email === true && valid.password === true){
+      e.preventDefault();
+      setBtnloading(true);
+      setValid((prevState) => ({
+        ...prevState,
+        disableButton:true,
+        auth:true,
+        authError:"",
+      }))
+       dispatch(login({ email, password }))
+       .then((response) => {
+         if(response.payload.user.status === true){
+          setBtnloading(false);
+          setValid((prevState) => ({
+            ...prevState,
+            disableButton:false
+          }))
+         }
+       }).catch((error) => {
+        setBtnloading(false);
+        setValid((prevState) => ({
+          ...prevState,
+          disableButton:false,
+          authError:"Email or Password is incorrect",
+          auth:false,
+        }));
+
+       });
+    }else{
+      e.preventDefault();
+    }
+   
   };
 
   const handleChange = (e) => {
@@ -41,12 +85,7 @@ const Login = () => {
     if (e.target.name === "password") {
       validatePass(e.target.value);
     }
-    if(valid.email === true && valid.password === true){
-      setValid((prevState) => ({
-        ...prevState,
-        disableButton: false,
-      }));
-    }
+
   };
 
   const validateEmail = (email) => {
@@ -89,10 +128,10 @@ const Login = () => {
           lg={6}
           item
         >
-          <Box
+           <Box
             style={{
               height: "42rem",
-              width: "42rem",
+              maxWidth: "44rem",
               backgroundSize: "cover",
               backgroundBlendMode: "overlay",
               backgroundColor: "rgba(45, 45, 45, 0.55)",
@@ -105,7 +144,9 @@ const Login = () => {
               "& > :not(style)": { m: 1, maxWidth: "65ch"},
             }}>
         <Grid sm={12} xs={12} md={12} lg={12} item m={4}>
-        <Typography  variant="h4" className={classes.auth_head} ml={6} mt={8}>Login to your account</Typography>
+        <Typography  variant="h4" className={classes.auth_head} m={6} mt={8}>
+           Login to your account
+        </Typography>
         </Grid>
           <form onSubmit={handleSubmit} className={styles.form_align}>
           <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
@@ -120,7 +161,7 @@ const Login = () => {
               value={inputs.email}
               name="email"
               error={!valid.email}
-              helperText={valid.emailError}
+              helperText={valid.emailError }
             />
             </Grid>
             <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
@@ -140,23 +181,41 @@ const Login = () => {
             />
             </Grid>
             <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
-            <Typography
+                 {!valid.auth
+                  ?  <Typography
+                  variant="string"
+                  align="center"
+                  className={` ${muistyle.wd_text} ${muistyle.wd_danger_text}`}
+                >
+                  {valid.authError}
+                </Typography>
+                : ""
+                 }
+            </Grid>
+            <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
+           <Typography
               variant="string"
               align="center"
               className={`field-spacing ${classes.forget_pass_text}`}
             >
               Forget Password?
             </Typography>
+
             </Grid>
-            <Grid sm={12} xs={12} md={12} lg={12} item m={3}  >
+            <Grid sm={12} xs={12} md={12} lg={12} item m={3} >
             <Button
               variant="contained"
               className="auth-btn"
               type="submit"
               disabled={valid.disableButton}
-              className={`${classes.login_btn} ${classes.centerBox}`}
+              className={`${classes.login_btn} ${muistyle.wd_primary_btn} ${classes.centerBox}`}
             >
-              Login
+                {bntloading 
+                    ? <CircularProgress  size={30} thickness={6}  sx={{
+                      color: '#ffffff',
+                    }}/> 
+                    : "Login"
+                    }
             </Button>
             </Grid>
           </form>

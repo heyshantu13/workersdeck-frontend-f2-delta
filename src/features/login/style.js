@@ -5,7 +5,6 @@ const customStyle = makeStyles({
     forget_pass_text: {"fontFamily":"Poppins","fontStyle":"normal","fontWeight":"normal","fontSize":"18px","lineHeight":"27px","color":"#2C5282"},
     authform: {top:"40px"},
     login_btn:{
-        background: "#3F51B5",
         borderRadius: "5px",
         width:"20rem",
         height:"50px",
@@ -14,6 +13,7 @@ const customStyle = makeStyles({
         justifyContent: "center",
         alignItems: "center"
       },
+     
 });
 
 export default customStyle;

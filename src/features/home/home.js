@@ -9,6 +9,7 @@ import {
   TextField,
   Card,
   Button,
+  CircularProgress,
 } from "@mui/material/";
 import ServiceCard from "../../components/Card/ServiceCard";
 import ServiceList from "../../constants/services";
@@ -24,15 +25,10 @@ const Home = () => {
     pincode: "",
     city: "",
     category_id: "",
-    cityError:"",
-    categoryidError:"",
+    pincodeError:"",
   });
 
-  const [valid, setValid] = useState({
-    pincode: true,
-    city: true,
-    category_id:true,
-  });
+  const  [bntloading, setBtnloading ] = useState(false);
 
   const classes = customStyle();
 
@@ -45,43 +41,13 @@ const Home = () => {
   };
 
   const handleSubmit = (e) => {
-
+    if(form.pincode.length === 0 || form.city.length === 0 || form.category_id.length === 0 ){
+      e.preventDefault();
+    }else{
+      e.preventDefault();
+      setBtnloading(true);
+    }
   };
-
-  const validateCity = (value) => {
-    console.log(value);
-    if(value === ''){
-      setValid((prevState) => ({
-        ...prevState,
-        city: false,
-        cityError: "Plese select city"
-      }));
-    }else{
-      setValid((prevState) => ({
-        ...prevState,
-        city: true,
-        cityError: ""
-      }));
-    }
-
-  } 
-  const validateCategoty = (value) => {
-
-    if(value === ''){
-      setValid((prevState) => ({
-        ...prevState,
-        category_id: false,
-        categoryidError: "Plese select Service"
-      }));
-    }else{
-      setValid((prevState) => ({
-        ...prevState,
-        category_id: true,
-        categoryidError: ""
-      }));
-    }
-
-  } 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -134,8 +100,7 @@ const Home = () => {
                         name={"city"}
                         className={classes.wd_select}
                         onChange={handleChange}
-                        error={!valid.city}
-                        helperText={valid.cityError}
+                        required
                       >
                         {Cities.map((cityObj) => (
                           <MenuItem value={cityObj.name} key={cityObj.id}>
@@ -159,8 +124,7 @@ const Home = () => {
                         name={"category_id"}
                         onChange={handleChange}
                         className={classes.wd_select}
-                        error={!valid.category_id}
-                        helperText={valid.categoryidError}
+                        required
                         
                       >
                         {ServiceList.map((serviceObj) => (
@@ -179,11 +143,9 @@ const Home = () => {
                         variant="outlined"
                         name={"pincode"}
                         value={form.pincode}
-                        maxLength={6}
                         onChange={handleChange}
                         className={classes.wd_select}
-                        error={!valid.pincode}
-                        helperText={valid.pincodeError}
+                        required
                         onKeyPress={(event) => {
                           if (!/[0-9]/.test(event.key)) {
                             event.preventDefault();
@@ -193,7 +155,15 @@ const Home = () => {
                     </FormControl>
                   </Grid>
                   <Grid sm={12} xs={12} md={2} lg={1}  mr={1} item>
-                  <Button variant="contained" className={`${classes.wd_go_btn} ${styles.btn_align}`} type="submit">Go</Button>
+                  <Button variant="contained" className={`${classes.wd_go_btn} ${styles.btn_align}`} type="submit">
+                   
+                   {bntloading 
+                    ? <CircularProgress  size={30} thickness={6}  sx={{
+                      color: '#ffffff',
+                    }}/> 
+                    : "GO"
+                    }
+                    </Button>
                   </Grid>
                 </Grid>
               </form>

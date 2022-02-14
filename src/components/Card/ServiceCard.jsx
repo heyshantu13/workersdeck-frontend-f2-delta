@@ -14,8 +14,8 @@ const customStyle = makeStyles({
     color: "#000000",
   },
   wd_service_image:{
-    height: "92px",
-    width: "92px",
+    height: "84px",
+    width: "84px",
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',

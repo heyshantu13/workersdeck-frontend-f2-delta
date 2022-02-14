@@ -97,7 +97,7 @@ const Signup = () => {
           <Box
             style={{
               height: "42rem",
-              width: "42rem",
+              maxWidth: "44rem",
               backgroundSize: "cover",
               backgroundBlendMode: "overlay",
               backgroundColor: "rgba(45, 45, 45, 0.55)",

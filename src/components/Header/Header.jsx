@@ -15,6 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink,Link, useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
 import LoadingBar from 'react-top-loading-bar';
+import {useSelector,useDispatch} from "react-redux";
 
 const lightTheme = createTheme({
   palette: {
@@ -35,6 +36,8 @@ const Header = () => {
   const pages = ["Home", "Register As Worker"];
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [progress, setProgress] = useState(0);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

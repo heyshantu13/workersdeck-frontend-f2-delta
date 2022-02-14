@@ -9,6 +9,8 @@ import Login from "./features/login/login";
 import Home from "./features/home/home";
 import Signup from "./features/signup/signup";
 import ResetPass from "./features/reset/reset";
+import ServiceList from "./features/service/service";
+
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Signup />} />
             <Route exact path="/reset" element={<ResetPass />} />
+            <Route path="/services" element={<ServiceList />}>
+                <Route path=":serviceId" element={<ServiceList />} />
+            </Route>
       </Routes>
     </BrowserRouter>
     </>
