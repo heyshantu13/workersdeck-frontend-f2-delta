@@ -28,16 +28,19 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   await AuthService.logout();
 });
 
-const initialState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
-
+const initialState =  {
+  isLoggedIn:false,
+  user : null
+}
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: {
     [login.fulfilled]: (state, action) => {
+      console.log("Fullfillng...");
+      console.log(action.payload.user.data);
+      console.log("Fullfilled");
       state.isLoggedIn = true;
       state.user = action.payload.user;
     },

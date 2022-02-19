@@ -1,28 +1,52 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { setMessage } from "../message/messageSlice";
+import AuthService from "../../services/auth.service";
 
-const initialState = {
-    value: 0,
+
+export const signup = createAsyncThunk(
+  "user/signup",
+  async ({ fullname,email, password,mobile_no }, thunkAPI) => {
+    try {
+      const data = await AuthService.register(fullname,email, password,mobile_no);
+      return { user: data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+
+const initialState =  {
+  isLoggedIn:false,
+  user : null
 }
 
-export const signupSlice = createSlice({
-    name: 'signup',
-    initialState,
-    reducers: {
-      increment: (state) => {
-        // Redux Toolkit allows us to write "mutating" logic in reducers. It
-        // doesn't actually mutate the state because it uses the Immer library,
-        // which detects changes to a "draft state" and produces a brand new
-        // immutable state based off those changes
-        state.value += 1
-      },
-      decrement: (state) => {
-        state.value -= 1
-      },
-      incrementByAmount: (state, action) => {
-        state.value += action.payload
-      },
+const authSlice = createSlice({
+  name: "register",
+  initialState,
+  extraReducers: {
+    [signup.fulfilled]: (state, action) => {
+      state.isLoggedIn = false;
+      state.user = action.payload.user;
     },
-  })
+    [signup.rejected]: (state, action) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    },
+    [signup.fulfilled]: (state, action) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    },
+  },
+});
 
-export const { increment, decrement, incrementByAmount } = signupSlice.actions;
-export default signupSlice.reducer;
+const { reducer } = authSlice;
+export default reducer;
+

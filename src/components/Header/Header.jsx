@@ -16,6 +16,7 @@ import { NavLink,Link, useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
 import LoadingBar from 'react-top-loading-bar';
 import {useSelector,useDispatch} from "react-redux";
+import {logout} from "../../features/login/loginSlice";
 
 const lightTheme = createTheme({
   palette: {
@@ -33,11 +34,12 @@ const lightTheme = createTheme({
 });
 
 const Header = () => {
-  const pages = ["Home", "Register As Worker"];
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [progress, setProgress] = useState(0);
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const userInfo = useSelector((state) => state.login.user);
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -50,6 +52,10 @@ const Header = () => {
   useEffect(() => {
     setProgress(100);
   }, []);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  }
 
   return (
     <>
@@ -159,22 +165,37 @@ const Header = () => {
                 >
                   Register As Worker
                 </Button>
-                <NavLink to="/register">
+                <NavLink to={isLoggedIn ? "/dashboard" : "/login" }>
                 <Button
                   variant="contained"
                   className={`${styles.btn_primary} ${styles.btn_md}`}
                 >
-                  <Typography textAlign="center">Register</Typography>
+                  <Typography textAlign="center" style={{
+                       textDecoration:"none",
+                    } }>{isLoggedIn ? userInfo.data.fullname : "Login" }</Typography>
                 </Button>
                </NavLink>
-                <NavLink to="/login">
+               {!isLoggedIn &&  
+               <NavLink to="/register"> 
                 <Button
                   variant="contained"
                   className={`${styles.btn_secondary} ${styles.btn_md}`}
                 >
-                    <Typography textAlign="center">Login</Typography>
+                    <Typography textAlign="center" >{isLoggedIn ? "Logout" : "Register" }</Typography>
                 </Button>
-                </NavLink>
+              </NavLink>
+              }
+                {isLoggedIn &&  
+             
+                <Button
+                  variant="contained"
+                  className={`${styles.btn_secondary} ${styles.btn_md}`}
+                  onClick ={handleLogout}
+                >
+                    <Typography textAlign="center" >{isLoggedIn ? "Logout" : "Register" }</Typography>
+                </Button>
+            
+              }
               </Box>
             </Toolbar>
           </Container>

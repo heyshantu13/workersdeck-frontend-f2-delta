@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Box,
   Grid,
@@ -6,20 +6,31 @@ import {
   Button,
   Typography,
   CircularProgress,
+  Skeleton
 } from "@mui/material/";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, } from "react-redux";
 import { login } from "./loginSlice";
-import { clearMessage } from "../message/messageSlice";
 import styles from "../../assets/main.module.css";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
 import muiStyle from "../../assets/mui_style";
+import {useNavigate } from "react-router-dom"
+
 
 const Login = () => {
   
   const classes = customStyle();
   const dispatch = useDispatch();
   const muistyle = muiStyle();
+  const userinfo = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const loadbox = false;
+ 
+  const [assets,setAssets] = useState({
+    background : false,
+  });
+
 
   const [inputs, setInputs] = useState({
     email: "",
@@ -34,10 +45,17 @@ const Login = () => {
     passwordError: "",
     emailError: "",
     authError: "",
+    success:false,
   });
 
   const  [bntloading, setBtnloading ] = useState(false);
 
+  useEffect(() => {
+    setAssets((prevState) => ({
+      ...prevState,
+      background:true,
+    }))
+  }, []);
 
   const handleSubmit = (e) => {
     const {email, password} =  inputs;
@@ -53,12 +71,22 @@ const Login = () => {
        dispatch(login({ email, password }))
        .then((response) => {
          if(response.payload.user.status === true){
+          console.log(userinfo);
           setBtnloading(false);
           setValid((prevState) => ({
             ...prevState,
-            disableButton:false
+            disableButton:false,
+            authError:"Login Succesful...",
+            auth:false,
+            success:true,
           }))
          }
+         console.log("isloggedin",isLoggedIn);
+         setTimeout(() => {
+           //history.push("/");
+          navigate("/");
+        }, 1200);
+       
        }).catch((error) => {
         setBtnloading(false);
         setValid((prevState) => ({
@@ -89,8 +117,7 @@ const Login = () => {
   };
 
   const validateEmail = (email) => {
-    const pattern =
-      /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+    const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
     const result = pattern.test(email);
     if (result === false) {
       setValid((prevState) => ({
@@ -128,6 +155,7 @@ const Login = () => {
           lg={6}
           item
         >
+          { assets.background ?
            <Box
             style={{
               height: "42rem",
@@ -136,8 +164,15 @@ const Login = () => {
               backgroundBlendMode: "overlay",
               backgroundColor: "rgba(45, 45, 45, 0.55)",
               backgroundImage: `url(${registerBackground})`,
+            
             }}
           />
+          :
+          <Skeleton variant="rectangular" style={{
+            height: "42rem",
+            maxWidth: "44rem",
+           }} />
+        }
         </Grid>
         <Grid sm={12} xs={12} md={6} lg={6} item >
         <Box component="span" className={classes.authform} sx={{

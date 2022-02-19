@@ -1,15 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import homeReducer from '../features/home/homeSlice';
-import loginReducer from '../features/home/loginSlice';
+import authReducer  from '../features/login/loginSlice';
 
-const reducer = {
-  home: homeReducer,
-  login: loginReducer,
-}
 
-const store =  configureStore({
-  reducer,
-  devTool:true,
+export const store = configureStore({
+  reducer: {
+    login: authReducer,
+  },
+  devTools: true,
 });
 
-export default store;
+

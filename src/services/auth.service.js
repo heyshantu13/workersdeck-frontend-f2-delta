@@ -16,6 +16,7 @@ const register = (fullname, email, password,mobile_no) => {
     mobile_no
   },axiosConfig);
 };
+
 const login = (email, password) => {
   return axios
     .post(API_URL + "user/signin", {

@@ -29,6 +29,18 @@ const muiStyle = makeStyles({
       },
     wd_success_text:{
         "color":"#3c763d"
+     },
+     wd_card:{
+        background: '#FFFFFF',
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        borderRadius: '8px',
+     },
+     sub_cat_btn:{
+        background: '#212121',
+        borderRadius: '8px',
+     },
+     sub_cat_btn_invert:{
+
      }
 });
 
