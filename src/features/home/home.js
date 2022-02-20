@@ -18,6 +18,7 @@ import customStyle from "./style";
 import banner from "../../assets/wd_home_banner.jpg";
 import OfferBanner from "../../assets/offerbanner.png";
 import Cities from "../../constants/cities";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
 
@@ -220,6 +221,7 @@ const Home = () => {
           {/* Left Area End Of Banner */}
         </Grid>
         {/* Offer Area End */}
+        <Footer/>
       </Grid>
       {/* Home Page End */}
     </>

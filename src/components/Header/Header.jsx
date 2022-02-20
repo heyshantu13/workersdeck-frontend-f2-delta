@@ -17,6 +17,8 @@ import styles from "./header.module.css";
 import LoadingBar from 'react-top-loading-bar';
 import {useSelector,useDispatch} from "react-redux";
 import {logout} from "../../features/login/loginSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const lightTheme = createTheme({
   palette: {
@@ -34,6 +36,17 @@ const lightTheme = createTheme({
 });
 
 const Header = () => {
+
+  const notify = () => toast.success("Logged Out Succesfully",{
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    });
+
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -55,10 +68,12 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    notify();
   }
 
   return (
     <>
+    <ToastContainer/>
     <LoadingBar
     color='#3f51b5'
     progress={progress}

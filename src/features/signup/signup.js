@@ -20,7 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Signup = () => {
 
   const notify = () => toast("Successfully Registered",{
-    position: "top-right",
+    position: "bottom-center",
     autoClose: 2500,
     hideProgressBar: false,
     closeOnClick: true,
