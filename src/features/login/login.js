@@ -14,7 +14,9 @@ import styles from "../../assets/main.module.css";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
 import muiStyle from "../../assets/mui_style";
-import {useNavigate } from "react-router-dom"
+import {useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
@@ -25,7 +27,16 @@ const Login = () => {
   const userinfo = useSelector((state) => state.user);
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const loadbox = false;
+  const notify = () => toast("Successfully Loggedin ",{
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    });
+
  
   const [assets,setAssets] = useState({
     background : false,
@@ -70,22 +81,16 @@ const Login = () => {
       }))
        dispatch(login({ email, password }))
        .then((response) => {
+         console.log("response",response);
          if(response.payload.user.status === true){
-          console.log(userinfo);
           setBtnloading(false);
-          setValid((prevState) => ({
-            ...prevState,
-            disableButton:false,
-            authError:"Login Succesful...",
-            auth:false,
-            success:true,
-          }))
+          notify();
          }
-         console.log("isloggedin",isLoggedIn);
+         
          setTimeout(() => {
            //history.push("/");
-          navigate("/");
-        }, 1200);
+           navigate("/");
+        }, 2500);
        
        }).catch((error) => {
         setBtnloading(false);

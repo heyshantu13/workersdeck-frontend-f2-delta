@@ -38,9 +38,6 @@ const authSlice = createSlice({
   initialState,
   extraReducers: {
     [login.fulfilled]: (state, action) => {
-      console.log("Fullfillng...");
-      console.log(action.payload.user.data);
-      console.log("Fullfilled");
       state.isLoggedIn = true;
       state.user = action.payload.user;
     },

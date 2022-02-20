@@ -5,24 +5,45 @@ import {
   TextField,
   Button,
   Typography,
+  CircularProgress
 } from "@mui/material/";
 import styles from "../../assets/main.module.css";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
+import muiStyle from "../../assets/mui_style";
+import AuthService from "../../services/auth.service";
+import {useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Signup = () => {
+
+  const notify = () => toast("Successfully Registered",{
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    });
+
   
   const classes = customStyle();
+  const muistyle = muiStyle();
+  const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
     fullname:"",
     email: "",
     password: "",
-    mobileno:"",
+    mobile_no:"",
     fullnameError:"",
-    mobilenoError:"",
+    mobile_noError:"",
     passwordError: "",
     emailError: "",
+    authError: "",
   });
 
   const [valid, setValid] = useState({
@@ -30,11 +51,48 @@ const Signup = () => {
     password: true,
     disableButton: true,
     fullname:true,
-    mobileno:true,
+    mobile_no:true,
+    auth:true,
   });
 
-  const handleSubmit = (e) => {
+  const  [bntloading, setBtnloading ] = useState(false);
+
+
+  const handleSubmit = async (e) => {
+    const {email, password,fullname,mobile_no} =  inputs;
     e.preventDefault();
+    if(valid.email === true && valid.password === true && valid.fullname === true && valid.mobile_no === true){
+          setBtnloading(true);
+          setValid((prevState) => ({
+            ...prevState,
+            disableButton:true,
+            auth:true,
+            authError:"",
+          }));
+          // hit api login call
+          await AuthService.register(fullname,email, password,mobile_no).then(response => { 
+              if(response.data.status === true){
+                setBtnloading(false);
+                notify();
+                setTimeout(() => {
+                  //history.push("/");
+                  navigate("/login");
+               }, 2500);
+               
+              }else{
+                setBtnloading(false);
+                setValid((prevState) => ({ 
+                  auth:false
+                }));
+                setInputs((prevState) => ({ 
+                  authError: response.data.message
+                }));
+
+              }
+          });
+    }else{
+      setBtnloading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -46,7 +104,21 @@ const Signup = () => {
     if (e.target.name === "password") {
       validatePass(e.target.value);
     }
-    if(valid.email === true && valid.password === true){
+    if(e.target.name === "fullname") {
+      if(inputs.fullname === "" || inputs.fullname.length < 6){
+        setValid((valid) => ({ ...valid, fullname: false }));
+      }else{
+        setValid((valid) => ({ ...valid, fullname: true }));
+      }
+    }
+    if(e.target.name === "mobile_no") {
+      if(inputs.mobile_no === "" ){
+        setValid((valid) => ({ ...valid, mobile_no: false }));
+      }else{
+        setValid((valid) => ({ ...valid, mobile_no: true }));
+      }
+    }
+    if(valid.email === true && valid.password === true && valid.fullname === true && valid.mobile_no === true){
       setValid((prevState) => ({
         ...prevState,
         disableButton: false,
@@ -86,8 +158,9 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <>  
       <Grid container>
+      <ToastContainer />
         <Grid
           sx={{ display: { xs: "none", sm: "none", md: "block", lg: "block" } }}
           md={6}
@@ -147,15 +220,15 @@ const Signup = () => {
             <TextField
               required
               onChange={handleChange}
-              id="email"
+              id="mobile_no"
               label="Mobile Number"
               variant="outlined"
               className={`field-spacing`}
               fullWidth
-              value={inputs.mobileno}
-              name="mobileno"
-              error={!valid.mobileno}
-              helperText={valid.mobilenoError}
+              value={inputs.mobile_no}
+              name="mobile_no"
+              error={!valid.mobile_no}
+              helperText={valid.mobile_noError}
               onKeyPress={(event) => {
                 if (!/[0-9]/.test(event.key)) {
                   event.preventDefault();
@@ -183,6 +256,18 @@ const Signup = () => {
             />
             </Grid>
             <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
+                 {!valid.auth
+                  ?  <Typography
+                  variant="string"
+                  align="center"
+                  className={` ${muistyle.wd_text} ${muistyle.wd_danger_text}`}
+                >
+                  {inputs.authError}
+                </Typography>
+                : ""
+                 }
+            </Grid>
+            <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
             <Typography
               variant="string"
               align="center"
@@ -199,7 +284,12 @@ const Signup = () => {
               disabled={valid.disableButton}
               className={`${classes.login_btn} ${classes.centerBox}`}
             >
-              Register
+              {bntloading 
+                    ? <CircularProgress  size={30} thickness={6}  sx={{
+                      color: '#ffffff',
+                    }}/> 
+                    : "Create Account"
+                    }
             </Button>
             </Grid>
           </form>

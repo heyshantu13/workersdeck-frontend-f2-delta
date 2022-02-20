@@ -3,50 +3,38 @@ import { setMessage } from "../message/messageSlice";
 import AuthService from "../../services/auth.service";
 
 
-export const signup = createAsyncThunk(
+export const register = createAsyncThunk(
   "user/signup",
   async ({ fullname,email, password,mobile_no }, thunkAPI) => {
-    try {
-      const data = await AuthService.register(fullname,email, password,mobile_no);
-      return { user: data };
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
-    }
+    const data = await AuthService.register(fullname,email, password,mobile_no).then(response => {
+      console.log(response.data);
+      return{data: response};
+    }).catch(err => {
+      return{data: err};
+    })
   }
 );
 
 
 const initialState =  {
   isLoggedIn:false,
-  user : null
+  response : null
 }
 
 const authSlice = createSlice({
-  name: "register",
+  name: "auth",
   initialState,
   extraReducers: {
-    [signup.fulfilled]: (state, action) => {
+    [register.fulfilled]: (state, action) => {
       state.isLoggedIn = false;
-      state.user = action.payload.user;
+      state.response = action.payload.data;
     },
-    [signup.rejected]: (state, action) => {
+    [register.rejected]: (state, action) => {
       state.isLoggedIn = false;
-      state.user = null;
-    },
-    [signup.fulfilled]: (state, action) => {
-      state.isLoggedIn = false;
-      state.user = null;
+      state.response = null;
     },
   },
 });
-
 const { reducer } = authSlice;
 export default reducer;
 
