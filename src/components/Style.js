@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
-import Button from '@mui/material/Button';
 
 const useStyles = makeStyles({
   root: {
@@ -14,9 +13,5 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Hook() {
-    const classes = useStyles();
-    return <Button className={classes.root}>Hook</Button>;
-  }
 
-// export default useStyles;
+ export default useStyles;
