@@ -27,16 +27,15 @@ const Login = () => {
   const userinfo = useSelector((state) => state.user);
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const notify = () => toast("Successfully Loggedin ",{
-    position: "top-right",
-    autoClose: 2500,
+  const notify = () => toast.success("Successfully Loggedin ",{
+    position: "bottom-center",
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: false,
     draggable: false,
     progress: undefined,
     });
-
  
   const [assets,setAssets] = useState({
     background : false,
@@ -81,16 +80,15 @@ const Login = () => {
       }))
        dispatch(login({ email, password }))
        .then((response) => {
-         console.log("response",response);
+        notify();
          if(response.payload.user.status === true){
           setBtnloading(false);
-          notify();
          }
          
          setTimeout(() => {
            //history.push("/");
            navigate("/");
-        }, 2500);
+        }, 2000);
        
        }).catch((error) => {
         setBtnloading(false);
@@ -154,6 +152,7 @@ const Login = () => {
   return (
     <>
       <Grid container>
+      <ToastContainer />
         <Grid
           sx={{ display: { xs: "none", sm: "none", md: "block", lg: "block" } }}
           md={6}
