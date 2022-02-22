@@ -37,6 +37,7 @@ const lightTheme = createTheme({
 
 const Header = () => {
 
+
   const notify = () => toast.success("Logged Out Succesfully",{
     position: "top-right",
     autoClose: 2500,
@@ -81,7 +82,7 @@ const Header = () => {
     height={"4px"}
   />
       <ThemeProvider theme={lightTheme}>
-        <AppBar position="static" color="primary">
+        <AppBar position="sticky" color="primary" style={{boxShadow: "0 12px 34px -11px rgb(65 62 101 / 10%)"}}>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
               <Typography

@@ -88,7 +88,7 @@ const Login = () => {
          setTimeout(() => {
            //history.push("/");
            navigate("/");
-        }, 2000);
+        }, 100);
        
        }).catch((error) => {
         setBtnloading(false);
