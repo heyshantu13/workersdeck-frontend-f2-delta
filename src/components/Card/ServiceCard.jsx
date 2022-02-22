@@ -28,7 +28,7 @@ const ServiceCard = (props) => {
     const { id, title, image } = props;
     return(
         <>
-        <Button key={id} sx={{ m: 1, display: "block", mt: 8 }}>
+        <Button key={id} sx={{ m: 1, display: "block", mt: 8 }} key={id}>
           <CardMedia className={classes.wd_service_image} image={image} />
           <CardContent>
             <Typography

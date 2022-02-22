@@ -19,8 +19,6 @@ import banner from "../../assets/wd_home_banner.jpg";
 import OfferBanner from "../../assets/offerbanner.png";
 import Cities from "../../constants/cities";
 import Footer from "../../components/Footer/Footer";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [form, setForm] = useState({
@@ -183,10 +181,6 @@ const Home = () => {
         {/* End Select City,Zipcode and Service */}
         {/* Service Card Start */}
         <Grid
-          xs={12}
-          sm={12}
-          md={12}
-          lg={12}
           container
           direction="row"
           justifyContent="center"
@@ -194,8 +188,10 @@ const Home = () => {
         >
           <Grid item>
             <Card className={classes.wd_service_card}>
-              <Grid container>
-                {ServiceList.map((serviceObj) => getServiceCard(serviceObj))}
+              <Grid container key={1}>
+                {ServiceList.map((serviceObj) => <Grid item xs={12} sm={12} md={2} lg={2} ml={3} key={serviceObj.id}>
+        <ServiceCard {...serviceObj} />
+      </Grid>)}
               </Grid>
             </Card>
           </Grid>

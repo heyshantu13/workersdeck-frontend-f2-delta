@@ -12,7 +12,7 @@ import {
 } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink,Link, useNavigate } from "react-router-dom";
+import { NavLink,Link, } from "react-router-dom";
 import styles from "./header.module.css";
 import LoadingBar from 'react-top-loading-bar';
 import {useSelector,useDispatch} from "react-redux";
