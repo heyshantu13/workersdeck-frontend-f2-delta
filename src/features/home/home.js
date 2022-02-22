@@ -19,8 +19,6 @@ import banner from "../../assets/wd_home_banner.jpg";
 import OfferBanner from "../../assets/offerbanner.png";
 import Cities from "../../constants/cities";
 import Footer from "../../components/Footer/Footer";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [form, setForm] = useState({

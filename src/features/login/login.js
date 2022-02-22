@@ -24,9 +24,7 @@ const Login = () => {
   const classes = customStyle();
   const dispatch = useDispatch();
   const muistyle = muiStyle();
-  const userinfo = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const notify = () => toast.success("Successfully Loggedin ",{
     position: "bottom-center",
     autoClose: 2000,
