@@ -40,5 +40,5 @@ To Visit App:
 [Workers Deck](http://workersdeck-fe.s3-website.us-east-2.amazonaws.com/)
 
 ##Credentials
-pesto@demo.com
+pesto@email.com
 12345678
