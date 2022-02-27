@@ -41,8 +41,8 @@ const Login = () => {
 
 
   const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
+    email: "pesto@email.com",
+    password: "12345678",
   });
 
   const [valid, setValid] = useState({

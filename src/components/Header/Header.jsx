@@ -174,14 +174,8 @@ const Header = () => {
                 
               
 
-                <Button
-                  key={"worker"}
-                  onClick={handleCloseNavMenu}
-                  sx={{ mr: 2, color: "black", display: "block", mt: 1 }}
-                >
-                  Register As Worker
-                </Button>
-                <NavLink to={isLoggedIn ? "/dashboard" : "/login" }>
+                
+                <NavLink to={isLoggedIn ? "/dashboard" : "/login" }  style={{ textDecoration: 'none' }}>
                 <Button
                   variant="contained"
                   className={`${styles.btn_primary} ${styles.btn_md}`}
@@ -192,7 +186,7 @@ const Header = () => {
                 </Button>
                </NavLink>
                {!isLoggedIn &&  
-               <NavLink to="/register"> 
+               <NavLink to="/register"  style={{ textDecoration: 'none' }}> 
                 <Button
                   variant="contained"
                   className={`${styles.btn_secondary} ${styles.btn_md}`}

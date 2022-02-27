@@ -61,6 +61,15 @@ const Home = () => {
     }));
   };
 
+  const scrollToTop = () =>{
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
+
   return (
     <>
       {/* Home Page Start */}
@@ -207,7 +216,7 @@ const Home = () => {
                 </h3>
                 <h4 className={classes.offetTextTwo}>AND GET FLAT 10% OFF</h4>
                 <Box textAlign="center">
-                  <Button className={classes.bookNowBtn}>BOOK NOW</Button>
+                  <Button className={classes.bookNowBtn} onClick={scrollToTop}>BOOK NOW</Button>
                 </Box>
               </Grid>
               <Grid sm={12} xs={12} md={4} lg={4} item>

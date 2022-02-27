@@ -13,7 +13,7 @@ export default [
     },
     {
       id: 4,
-      name: "Bengalure"
+      name: "Bengaluru"
     },
     {
       id: 5,
