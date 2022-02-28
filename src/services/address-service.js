@@ -2,8 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://18.118.208.14:8080/api/v1/";
 
-const user = JSON.parse(localStorage.getItem("user"));
-const token = user.data.accessToken; 
+
 
 let axiosConfig = {
   headers: {
@@ -13,7 +12,7 @@ let axiosConfig = {
 
 
 
-const fetchUserAddress = async () => {
+const fetchUserAddress = async (token) => {
     console.log("token2",token);
   return await axios.get(
     API_URL + "user/address",

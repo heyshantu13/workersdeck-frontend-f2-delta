@@ -21,9 +21,11 @@ const style = {
 };
 
 function SelectAddress() {
+  
 
   const classes = customStyle();
   let myaddress = null;
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTY0NjA0MzA5NiwiZXhwIjoxNjQ2MTI5NDk2fQ.kLlByGOow1ifgiSKZ4mrnYZc1ckUDt4bvPnLo8bHudc";
 
   const initAddressVal = {
     uid: "",
@@ -41,7 +43,7 @@ function SelectAddress() {
   }
 
   const getData = async () => {  
-    await UserAddressService.fetchUserAddress()
+    await UserAddressService.fetchUserAddress(token)
     .then(res => {  
       console.log(res)  
     })  

@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import "./style.css";
 import customStyle from "./style";
 import {useNavigate } from "react-router-dom";
+import moment from "moment";
+
 
 const style = {
     maxWidth: 360,
@@ -59,11 +61,11 @@ function BookingConfirmation () {
       >
         <Grid item container>
         <Grid sm={3} xs={12} md={3} lg={3} item mt={4} ml={3} >Booking Date</Grid>
-        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>7th Nov 2021 (Monday)</Grid>
+        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>{moment().format("DD-MM-YYYY")}</Grid>
         </Grid>
         <Grid item container>
         <Grid sm={3} xs={12} md={3} lg={3} item mt={4} ml={3} >Booking Time</Grid>
-        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>10:00 AM (Monday)</Grid>
+        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>{moment().format("hh:mm a")}</Grid>
         </Grid>
         <Grid item container>
         <Grid sm={3} xs={12} md={3} lg={3} item mt={4} ml={3} >Worker Info</Grid>
