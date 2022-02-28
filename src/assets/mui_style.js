@@ -41,7 +41,22 @@ const muiStyle = makeStyles({
      },
      sub_cat_btn_invert:{
 
-     }
+     },
+     addressHead: {
+        textAlign: "center",
+        fontWeight: "600",
+        fontSize: "25px",
+        fontFamily: "Poppins",
+      },
+      address_text:{fontFamily: "Poppins", fontStyle: "normal", fontWeight: "600", fontSize: "21px", lineHeight: "31px", color: "#909090"},
+      wd_address_new_text:{
+        fontFamily: "Poppins", fontStyle: "normal", fontWeight: "600", fontSize: "20px", lineHeight: "40px", color: "#3F51B5"
+      },
+      btn_md :{
+        width: "100%",
+        height: "52px",
+    }
+
 });
 
 export default muiStyle;

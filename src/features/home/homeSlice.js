@@ -1,26 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { setMessage } from "../message/messageSlice";
+import WDServiceList from "../../services/list.service";
 
-const initialState = { value: 0 }
+export const ServiceListNew = createAsyncThunk(
+  "/services/list/",
+  async ({ city, pincode,category_id }, thunkAPI) => {
+    try {
+      console.log("ServiceList slice ServiceList function");
+      const data = await WDServiceList.fetchServiceList(city, pincode,category_id);
+      return { data: data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 
 
-export const homeSlice = createSlice({
 
-    name: 'home',
+const initialState =  {
+  data : null
+}
+
+const serviceSlice = createSlice({
+  name: "fetchServiceList",
   initialState,
-  reducers: {
-    increment(state) {
-      state.value++
+  extraReducers: {
+    [ServiceListNew.fulfilled]: (state, action) => {
+      state.data = action.payload.data.data;
     },
-    decrement(state) {
-      state.value--
-    },
-    incrementByAmount(state, action) {
-      state.value += action.payload
+    [ServiceListNew.rejected]: (state, action) => {
+      state.data = null;
     },
   },
+});
 
+const { reducer } = serviceSlice;
+export default reducer;
 
-})
-
-export const { increment, decrement, incrementByAmount } = homeSlice.actions;
-export default homeSlice.reducer;

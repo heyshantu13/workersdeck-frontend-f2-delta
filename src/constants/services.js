@@ -6,7 +6,7 @@ export default [
     },
     {
       id: 2,
-      title: "Carpainter",
+      title: "Carpenter",
       image: "https://i.ibb.co/3k4B6q6/carpenter.png"
     },
     {
