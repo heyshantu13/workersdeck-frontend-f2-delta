@@ -90,7 +90,7 @@ function SelectAddress() {
             {/* Address box end here */}
 
             <Box component="span" sx={{ p: 4 }}>
-              <Link to="/checkout/new-address">
+              <Link to="/new-address">
                 <Typography
                   ml={4}
                   component="h3"

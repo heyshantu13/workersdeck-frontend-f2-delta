@@ -85,6 +85,7 @@ const ServiceList = () => {
           <Grid item xs={12} sm={12} md={8} lg={8}>
             {/* Show service Card Here */}
             {serviceResult.services.map((service,i) => (
+              
                <Container maxWidth="xl" className={classes.wd_myprofile_layout}  key={i}>
                  <Card lg={12} sm={12} className={classes.ServiceCard}>
                  <Grid container>
@@ -100,7 +101,7 @@ const ServiceList = () => {
                   maxWidth: { xs: 350, md: 300 },
                   marginLeft: "2rem",
                 }}
-                src={"https://via.placeholder.com/180/300"}
+                src={service.service_image}
               />
                    </Grid>
                    <Grid item xs={12} sm={12} md={7} lg={7}>

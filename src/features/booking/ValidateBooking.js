@@ -83,7 +83,7 @@ function BookingConfirmation () {
       >
         <Grid item container>
         <Grid sm={3} xs={12} md={3} lg={3} item mt={4} ml={3} >Service Charge</Grid>
-        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>₹1299</Grid>
+        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>₹299</Grid>
         </Grid>
         <Grid item container>
         <Grid sm={3} xs={12} md={3} lg={3} item mt={4} ml={3} >Booking Fees</Grid>
@@ -91,11 +91,11 @@ function BookingConfirmation () {
         </Grid>
         <Grid item container>
         <Grid sm={3} xs={12} md={3} lg={3} item mt={4} ml={3} >GST (18%)</Grid>
-        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>₹49</Grid>
+        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>₹ 62.64</Grid>
         </Grid>
         <Grid item container>
         <Grid sm={3} xs={12} md={3} lg={3} item mt={4} ml={3} className={'wd-pages-summary-h1'} style={{textAlign:'left'}}>Total</Grid>
-        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>₹49</Grid>
+        <Grid sm={3} xs={12} md={3} lg={3} item mt={3} ml={3} className={'wd-pages-summary-h1'}>₹410.64</Grid>
         </Grid>
     </Card>
     <Grid container direction="column" alignItems="right" justify="right" mt={3}>

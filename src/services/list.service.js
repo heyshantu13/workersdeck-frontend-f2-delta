@@ -9,7 +9,6 @@ let axiosConfig = {
 };
 
 
-
 const fetchServiceList = (city, pincode,category_id) => {
   return axios
     .get(API_URL + "services/list/", { params: { city,pincode,category_id },axiosConfig })

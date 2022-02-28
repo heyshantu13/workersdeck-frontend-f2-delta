@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import "./style.css";
 import MapPicker from "react-google-map-picker";
+import {useNavigate } from "react-router-dom";
+
 
 const style = {
   maxWidth: 360,
@@ -21,9 +23,14 @@ const DefaultLocation = { lat: 10, lng: 106 };
 const DefaultZoom = 10;
 
 function NewAddress() {
+    const navigate = useNavigate();
   const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
   const [location, setLocation] = useState(defaultLocation);
   const [zoom, setZoom] = useState(DefaultZoom);
+
+  const handleNewAddress = () => {
+    navigate("/select-address");
+  }
   const [address, setAddress] = useState({
     address: "",
     pincode: "",
@@ -120,7 +127,8 @@ function NewAddress() {
                   <Button
                     variant="contained"
                     className={`wd-checkout-btn btn-lft`}
-                    type="submit"
+                    type="button"
+                    onClick = {handleNewAddress}
                   >
                     Continue
                   </Button>
