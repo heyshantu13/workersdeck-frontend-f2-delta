@@ -19,12 +19,30 @@ import banner from "../../assets/wd_home_banner.jpg";
 import OfferBanner from "../../assets/offerbanner.png";
 import Cities from "../../constants/cities";
 import Footer from "../../components/Footer/Footer";
+import { ServiceListNew } from "./homeSlice";
+import { useDispatch, useSelector, } from "react-redux";
+import {useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const notify = () => toast.error("No Workers Avaialble Right Now For Your Location ",{
+    position: "bottom-center",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    });
+
   const [form, setForm] = useState({
-    pincode: "",
-    city: "",
-    category_id: "",
+    pincode: "123456",
+    city: "Nagpur",
+    category_id: "5",
     pincodeError: "",
   });
 
@@ -41,6 +59,7 @@ const Home = () => {
   };
 
   const handleSubmit = (e) => {
+    const {pincode, city,category_id} =  form;
     if (
       form.pincode.length === 0 ||
       form.city.length === 0 ||
@@ -50,6 +69,17 @@ const Home = () => {
     } else {
       e.preventDefault();
       setBtnloading(true);
+      dispatch(ServiceListNew({ city, pincode,category_id })).then((data) => {
+        if(data.payload.data.data.services.length != 0){
+          navigate("/services");
+        }else{
+          notify();
+          setBtnloading(false);
+        }
+      }).catch(err => {
+        notify();
+        setBtnloading(false);
+      })
     }
   };
 
@@ -72,6 +102,7 @@ const Home = () => {
 
   return (
     <>
+     <ToastContainer />
       {/* Home Page Start */}
       <Grid container>
         {/* Home page top banner */}
@@ -115,7 +146,7 @@ const Home = () => {
                     required
                   >
                     {Cities.map((cityObj) => (
-                      <MenuItem value={cityObj.name} key={cityObj.id}>
+                      <MenuItem value={cityObj.name} key={cityObj.id} selected={(cityObj.name === "Nagpur") ? true:false}>
                         {" "}
                         {cityObj.name}
                       </MenuItem>
@@ -139,7 +170,7 @@ const Home = () => {
                     required
                   >
                     {ServiceList.map((serviceObj) => (
-                      <MenuItem value={serviceObj.id} key={serviceObj.id}>
+                      <MenuItem value={serviceObj.id} key={serviceObj.id} selected={(serviceObj.id === 5) ? true:false}>
                         {serviceObj.title}
                       </MenuItem>
                     ))}

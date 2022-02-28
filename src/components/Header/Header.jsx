@@ -19,6 +19,8 @@ import {useSelector,useDispatch} from "react-redux";
 import {logout} from "../../features/login/loginSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useNavigate } from "react-router-dom";
+
 
 const lightTheme = createTheme({
   palette: {
@@ -36,7 +38,7 @@ const lightTheme = createTheme({
 });
 
 const Header = () => {
-
+  const navigate = useNavigate();
 
   const notify = () => toast.success("Logged Out Succesfully",{
     position: "top-right",
@@ -70,6 +72,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logout());
     notify();
+    navigate("/");
   }
 
   return (
