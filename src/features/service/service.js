@@ -82,7 +82,7 @@ const ServiceList = () => {
         </Grid>
 
          <Grid container>
-          <Grid item xs={12} sm={12} md={8} lg={8}>
+          <Grid item xs={12} sm={12} md={7} lg={7}>
             {/* Show service Card Here */}
             {serviceResult.services.map((service,i) => (
               
@@ -156,7 +156,7 @@ const ServiceList = () => {
             {/* End Service Card Here */}
               
           </Grid>
-         <Grid item xs={12} sm={12}  md={4} lg={4}>
+         <Grid item xs={12} sm={12}  md={5} lg={5}>
 
          </Grid>
         </Grid>
