@@ -102,9 +102,10 @@ const SelectAddress = () => {
                       onClick={() => setSelectedAddress(address.id)}
                     />
                 </FormControl>
-                <Typography ml={4} component="h4" className={classes.address_text}>
-                  {address.name}, {address.address}, {address.pin_code}
-                </Typography>
+                  <Typography ml={4} component="h4" className={classes.address_text}>
+                    {address.name}, {address.address}, {address.pin_code}
+                  </Typography>
+                  <hr></hr>
                 </Grid>
             ))
           ): (
@@ -113,7 +114,6 @@ const SelectAddress = () => {
           </Typography>
           )
         )}
-        <hr></hr>
         </Box>
         {/* Add New Address section */}
         <Box component="span" sx={{ p: 4 }}>
