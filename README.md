@@ -42,7 +42,7 @@ Test Credentials:
 
 - For User
  	 - pesto@email.com: 12345678
- 	 - Select : Pune/Cleaning/111045 for testing
+ 	 - Select : Nagpur/Cleaning/123456 for testing
      - Select Any Service & go to checkout page
 
 <br/>
