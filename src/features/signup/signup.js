@@ -7,13 +7,14 @@ import {
   Typography,
   CircularProgress
 } from "@mui/material/";
-import styles from "../../assets/main.module.css";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
 import muiStyle from "../../assets/mui_style";
 import AuthService from "../../services/auth.service";
 import {useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import styles from "../../assets/main.module.css";
+
 
 
 const Signup = () => {
@@ -26,6 +27,17 @@ const Signup = () => {
     pauseOnHover: false,
     draggable: false,
     progress: undefined,
+    });
+
+    const alert = (msg) =>
+    toast.error(msg, {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
     });
 
   
@@ -76,17 +88,15 @@ const Signup = () => {
                 setTimeout(() => {
                   //history.push("/");
                   navigate("/login");
-               }, 2500);
+               }, 1500);
                
               }else{
                 setBtnloading(false);
-                setValid((prevState) => ({ 
-                  auth:false
+                setValid((prevState) => ({
+                  ...prevState,
+                  disableButton: false,
                 }));
-                setInputs((prevState) => ({ 
-                  authError: response.data.message
-                }));
-
+                alert(response.data.message);
               }
           });
     }else{
@@ -158,48 +168,50 @@ const Signup = () => {
 
   return (
     <>  
-      <Grid container>
-        <Grid
+       <Grid container>
+         {/* start left box */}
+         <Grid
           sx={{ display: { xs: "none", sm: "none", md: "block", lg: "block" } }}
           md={6}
           lg={6}
           item
         >
-          <Box
-            style={{
-              height: "42rem",
-              maxWidth: "44rem",
-              backgroundSize: "cover",
-              backgroundBlendMode: "overlay",
-              backgroundColor: "rgba(45, 45, 45, 0.55)",
-              backgroundImage: `url(${registerBackground})`,
-            }}
-          />
-        </Grid>
-        <Grid sm={12} xs={12} md={6} lg={6} item >
-        <Box component="span" className={classes.authform} sx={{
-              "& > :not(style)": { m: 1, maxWidth: "65ch"},
-            }}>
-        <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
-        <Typography  variant="h4" className={classes.auth_head} ml={6} mt={8}>Create New Account</Typography>
-        </Grid>
-          <form onSubmit={handleSubmit} className={styles.form_align}>
-          <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
-            <TextField
-              required
-              onChange={handleChange}
-              id="fullname"
-              label="Full Name"
-              variant="outlined"
-              className={`field-spacing`}
-              fullWidth
-              value={inputs.fullname}
-              name="fullname"
-              error={!valid.fullname}
-              helperText={valid.fullnameError}
+            <Box
+              style={{
+                height: "41.5rem",
+                maxWidth: "44rem",
+                backgroundSize: "cover",
+                backgroundBlendMode: "overlay",
+                backgroundColor: "rgba(45, 45, 45, 0.55)",
+                backgroundImage: `url(${registerBackground})`,
+              }}
             />
+        </Grid>
+        {/* end left box */}
+        <Grid sm={12} xs={12} md={6} lg={6} item>
+              <Grid sm={12} xs={12} md={12} lg={12} item m={4}>
+                <Typography variant="h4" className={classes.auth_head} m={6} mt={6}>
+                  Create New WorkersDeck Account
+                </Typography>
+              </Grid>
+          {/* form start */}
+            <form onSubmit={handleSubmit} className={styles.form_align}>
+            <Grid sm={12} xs={12} md={8} lg={8} item>
+            <TextField
+                  required
+                  onChange={handleChange}
+                  id="fullname"
+                  label="Full Name"
+                  variant="outlined"
+                  className={`field-spacing`}
+                  fullWidth
+                  value={inputs.fullname}
+                  name="fullname"
+                  error={!valid.fullname}
+                  helperText={valid.fullnameError}
+                />
             </Grid>
-          <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
+            <Grid sm={12} xs={12} md={8} lg={8} item>
             <TextField
               required
               onChange={handleChange}
@@ -214,7 +226,7 @@ const Signup = () => {
               helperText={valid.emailError}
             />
             </Grid>
-            <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
+            <Grid sm={12} xs={12} md={8} lg={8} item>
             <TextField
               required
               onChange={handleChange}
@@ -235,65 +247,53 @@ const Signup = () => {
               inputProps={{ maxLength: 10 }}
             />
             </Grid>
-         
-            <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
-            <TextField
-              required
-              id="password"
-              label="Password"
-              variant="outlined"
-              type="password"
-              className={`field-spacing `}
-              fullWidth
-              onChange={handleChange}
-              value={inputs.password}
-              name="password"
-              error={!valid.password}
-              helperText={valid.passwordError}
-              inputProps={{ maxLength: 14 }}
-            />
+            <Grid sm={12} xs={12} md={8} lg={8} item>
+              <TextField
+                required
+                id="password"
+                label="Password"
+                variant="outlined"
+                type="password"
+                className={`field-spacing `}
+                fullWidth
+                onChange={handleChange}
+                value={inputs.password}
+                name="password"
+                error={!valid.password}
+                helperText={valid.passwordError}
+                inputProps={{ maxLength: 14 }}
+              />
             </Grid>
-            <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
-                 {!valid.auth
-                  ?  <Typography
-                  variant="string"
-                  align="center"
-                  className={` ${muistyle.wd_text} ${muistyle.wd_danger_text}`}
-                >
-                  {inputs.authError}
-                </Typography>
-                : ""
-                 }
+            
+            <Grid sm={12} xs={12} md={8} lg={8} item>
+              <Typography
+                variant="string"
+                align="center"
+                className={`field-spacing ${classes.forget_pass_text}`}
+              >
+                By Registration you accept TnC
+              </Typography>
             </Grid>
-            <Grid sm={12} xs={12} md={12} lg={12} item m={3}>
-            <Typography
-              variant="string"
-              align="center"
-              className={`field-spacing ${classes.forget_pass_text}`}
-            >
-               By Registration you accept TnC
-            </Typography>
-            </Grid>
-            <Grid sm={12} xs={12} md={12} lg={12} item m={3}  >
+            <Grid sm={12} xs={12} md={8} lg={8} item>
             <Button
               variant="contained"
               className="auth-btn"
               type="submit"
               disabled={valid.disableButton}
-              className={`${classes.login_btn} ${classes.centerBox}`}
+              
             >
               {bntloading 
                     ? <CircularProgress  size={30} thickness={6}  sx={{
                       color: '#ffffff',
                     }}/> 
-                    : "Create Account"
+                    : "Register With WorkersDeck"
                     }
             </Button>
             </Grid>
-          </form>
-          </Box>
-        </Grid>
-      </Grid>
+            </form>
+          {/* form end */}
+        </Grid>   
+       </Grid>
     </>
   );
 };
