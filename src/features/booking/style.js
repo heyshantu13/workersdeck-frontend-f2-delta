@@ -117,7 +117,8 @@ const customStyle = makeStyles({
   border: '1px solid rgba(0, 0, 0, 0.25)',
   boxSizing: 'border-box',
   height: '280px',
-  }
+  },
+ 
 });
 
 export default customStyle;

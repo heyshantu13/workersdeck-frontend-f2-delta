@@ -8,7 +8,6 @@ export const login = createAsyncThunk(
   "user/signin",
   async ({ email, password }, thunkAPI) => {
     try {
-      console.log("authservice slice login function");
       const data = await AuthService.login(email, password);
       return { user: data };
     } catch (error) {

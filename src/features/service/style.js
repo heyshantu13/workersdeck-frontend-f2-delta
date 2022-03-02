@@ -7,9 +7,12 @@ import { makeStyles } from "@mui/styles";
 const customStyle = makeStyles({
     ThirdCard: {
         background: "#FFFFFF",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        boxShadow: "rgb(65 62 101 / 10%) 0px 4px 4px",
         borderRadius: "8px",
         height: "5rem",
+        Maxwidth: "100%",
+        marginTop:"4px",
+        padding:"1px",
       },
       wdSubcategories:{
           background: "#FFFFFF ", 
@@ -28,13 +31,13 @@ const customStyle = makeStyles({
             color:"#ffffff",
         },
         wd_myprofile_layout:{
-            marginTop: "2rem",
+            marginTop: "1rem",
         },
         ServiceCard: {
             background: "#FFFFFF",
             boxShadow: "rgb(65 62 101 / 10%) 0px 4px 4px",
             borderRadius: "8px ",
-            height: "14rem",
+           height: "16rem",
           },
 
         wdServiceCardh1 : {
@@ -42,6 +45,7 @@ const customStyle = makeStyles({
               fontSize: "24px ",
               lineHeight: "42px ",
               color: "#000000 ",
+              whiteSpace: 'pre-line',
            
           },
             wdServiceCardSubtitle: {
@@ -49,7 +53,8 @@ const customStyle = makeStyles({
               fontSize: "16px ",
               lineHeight: "2rem ",
               color: "#909090 ",
-          
+              whiteSpace: 'pre-line',
+              height:"68px",
             },
             wdRating:{
                 marginLeft: "2.2rem ",
@@ -74,11 +79,11 @@ const customStyle = makeStyles({
                 color: "#000000",
                 float:"right",
                 marginRight:"2.6rem",
+                marginTop: "-25px",
             },
             bookService:{
                 float:"right",
                 marginRight:"2rem",
-                marginTop:"1rem",
                 backgroundColor:"#3F51B5",
             }
             

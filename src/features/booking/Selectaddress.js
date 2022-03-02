@@ -8,88 +8,115 @@ import {
   FormControl,
   Radio,
   FormControlLabel,
+  CircularProgress,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import customStyle from "../../assets/mui_style";
 import UserAddressService from "../../services/address-service";
-import { useDispatch, useSelector, } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import {useNavigate } from "react-router-dom";
 
 
 const style = {
   maxWidth: 360,
 };
 
-function SelectAddress() {
-  
-
+const SelectAddress = () => {
+  let addressResult;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const classes = customStyle();
-  let myaddress = null;
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTY0NjA0MzA5NiwiZXhwIjoxNjQ2MTI5NDk2fQ.kLlByGOow1ifgiSKZ4mrnYZc1ckUDt4bvPnLo8bHudc";
+  const [loading, setLoading] = useState(true);
+  const [dataAvail,setDataAvail] = useState(false);
+  const [userAddress, setUserAddress] = useState();
+  const [selectedAddress,setSelectedAddress] = useState();
+  const notify = (msg) =>
+  toast.error(msg, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+  });
 
-  const initAddressVal = {
-    uid: "",
-    type: "",
-    address: "",
-    pincode: "",
-  };
+  useEffect(async () => {
+    try{
+      addressResult = await UserAddressService.fetchUserAddress();
+        if('data' in addressResult ) {
+          setDataAvail(true);
+          setUserAddress(addressResult.data);
+        }else{
+          notify("You don't have any address.Please add new one");
+        }  
+    }catch(error){
+      notify(error);
+    }finally{
+      setLoading(false);
+    }
+  },[]); 
 
-  const [address, setAddress] = useState(initAddressVal);
-  const [addressId, setAddressId] = useState(0);
-
-  function handleClick(e) {
-    setAddressId(e.target.value);
-    console.log(addressId);
+  const handleAddress = () =>{
+    if(selectedAddress){
+      navigate("/select-time");
+    }else{
+      notify("Please select address first.");
+    }
   }
-
-  const getData = async () => {  
-    await UserAddressService.fetchUserAddress(token)
-    .then(res => {  
-      console.log(res)  
-    })  
-    .catch(err => {  
-      console.log(err)  
-    });  
-  }  
-
 
   return (
     <>
       <Grid item container>
-        <Grid item xs={12} md={12} mt={2}>
-          {/* Page Title */}
-          <Box xs={12} md={12} mb={2}>
-            <h4 className={classes.addressHead} sx={style}>
-              SELECT ADDRESS
-            </h4>
-          </Box>
-          {/* Page Title End */}
-        </Grid>
-
+      <Grid item xs={12} md={12} mt={2}>
+              <Box xs={12} md={12} mb={2}>
+              <h4 className={classes.addressHead} sx={style}>
+                  SELECT ADDRESS
+               </h4>
+              </Box>
+      </Grid>
         <Grid item xs={12} md={12} mt={1}>
-          <hr className="divider"></hr>
-          <Container maxWidth="xl" p={2}>
-            {/* Address box here */}
-            <Box component="span" sx={{ p: 2 }}>
-            <Grid item xs={12} md={12} ml={3}>
-<FormControl component="fieldset">
-  <FormControlLabel
-    value="11"
-    control={<Radio />}
-    label="Home"
-    onClick={handleClick}
-  />
-</FormControl>
-
-<Typography ml={4} component="h3" className={classes.address_text}>
-  123 Demo Address,Nagpur
-</Typography>
-</Grid>
-<hr className="divider"></hr>
-            </Box>
-            {/* Address box end here */}
-
-            <Box component="span" sx={{ p: 4 }}>
+        <Container maxWidth="lg" >
+        <hr></hr>
+        <Box component="span" sx={{ p: 2 }}>
+        {loading ? (
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <CircularProgress
+            size={60}
+            thickness={4}
+            sx={{
+              color: "#3f51b5",
+            }}
+          />
+          </div>
+        ) : (
+          (dataAvail) ? (
+            userAddress.map((address) => (
+              <Grid item xs={12} md={12} ml={3} key={address.id}>
+                <FormControl component="fieldset">
+                    <FormControlLabel
+                      value={address.id}
+                      control={<Radio />}
+                      label={address.type}
+                      onClick={() => setSelectedAddress(address.id)}
+                    />
+                </FormControl>
+                <Typography ml={4} component="h4" className={classes.address_text}>
+                  {address.name}, {address.address}, {address.pin_code}
+                </Typography>
+                </Grid>
+            ))
+          ): (
+            <Typography ml={4} component="h4" className={classes.address_text}>
+              No Address Avaialble
+          </Typography>
+          )
+        )}
+        <hr></hr>
+        </Box>
+        {/* Add New Address section */}
+        <Box component="span" sx={{ p: 4 }}>
               <Link to="/new-address">
                 <Typography
                   ml={4}
@@ -100,19 +127,20 @@ function SelectAddress() {
                 </Typography>
               </Link>
             </Box>
-
-            <Box component="span" sx={{ p: 4 }} textAlign="center">
+        {/* End */}
+        {/* Checkout Button */}
+        <Box component="span" sx={{ p: 4 }} textAlign="center">
               <Grid item xs={12} md={12} mt={3}>
-                <Link to="/select-time" >
-                  <Button variant="contained" className={classes.wd_primary_btn-classes.btn_md}>
-                    Continue with this address
+                  <Button variant="contained" className={classes.CheckoutBtn} onClick={handleAddress}>
+                    Continue with address
                   </Button>
-                </Link>
               </Grid>
-            </Box>
-          </Container>
+        </Box>
+        {/* End Checkout  button */}
+        </Container>
         </Grid>
-      </Grid>
+      </Grid> 
+      {/* End Griud */}
     </>
   );
 }

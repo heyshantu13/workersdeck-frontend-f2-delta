@@ -1,15 +1,28 @@
 import { configureStore } from '@reduxjs/toolkit';
+import {combineReducers } from 'redux';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 import authReducer  from '../features/login/loginSlice';
 import serviceReducer  from '../features/home/homeSlice';
 import bookingReducer  from '../features/service/serviceSlice';
 
 
+
+const reducers = combineReducers({
+  login: authReducer,
+  services: serviceReducer,
+  booking:bookingReducer,
+});
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig,reducers);
+
 export const store = configureStore({
-  reducer: {
-    login: authReducer,
-    services: serviceReducer,
-    booking:bookingReducer,
-  },
+  reducer:persistedReducer,
   devTools: true,
 });
 

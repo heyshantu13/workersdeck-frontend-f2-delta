@@ -22,8 +22,7 @@ import Footer from "../../components/Footer/Footer";
 import { ServiceListNew } from "./homeSlice";
 import { useDispatch, useSelector, } from "react-redux";
 import {useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -102,7 +101,6 @@ const Home = () => {
 
   return (
     <>
-     <ToastContainer />
       {/* Home Page Start */}
       <Grid container>
         {/* Home page top banner */}
