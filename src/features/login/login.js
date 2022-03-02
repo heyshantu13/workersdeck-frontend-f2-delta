@@ -15,8 +15,7 @@ import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
 import muiStyle from "../../assets/mui_style";
 import {useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
@@ -150,7 +149,6 @@ const Login = () => {
   return (
     <>
       <Grid container>
-      <ToastContainer />
         <Grid
           sx={{ display: { xs: "none", sm: "none", md: "block", lg: "block" } }}
           md={6}

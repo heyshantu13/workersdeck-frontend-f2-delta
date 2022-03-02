@@ -17,8 +17,7 @@ import styles from "./header.module.css";
 import LoadingBar from 'react-top-loading-bar';
 import {useSelector,useDispatch} from "react-redux";
 import {logout} from "../../features/login/loginSlice";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import {useNavigate } from "react-router-dom";
 
 
@@ -77,7 +76,6 @@ const Header = () => {
 
   return (
     <>
-    <ToastContainer/>
     <LoadingBar
     color='#3f51b5'
     progress={progress}

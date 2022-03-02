@@ -8,88 +8,88 @@ import {
   FormControl,
   Radio,
   FormControlLabel,
+  CircularProgress,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import customStyle from "../../assets/mui_style";
 import UserAddressService from "../../services/address-service";
 import { useDispatch, useSelector, } from "react-redux";
-
-
+import { toast } from "react-toastify";
 
 const style = {
   maxWidth: 360,
 };
 
-function SelectAddress() {
-  
+const SelectAddress = () => {
 
+  const dispatch = useDispatch();
   const classes = customStyle();
-  let myaddress = null;
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTY0NjA0MzA5NiwiZXhwIjoxNjQ2MTI5NDk2fQ.kLlByGOow1ifgiSKZ4mrnYZc1ckUDt4bvPnLo8bHudc";
+  const [loading, setLoading] = useState(true);
+  const [dataAvail,setDataAvail] = useState(false);
+  const notify = (msg) =>
+  toast.error(msg, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+  });
 
-  const initAddressVal = {
-    uid: "",
-    type: "",
-    address: "",
-    pincode: "",
-  };
+  useEffect(() => {
+    UserAddressService.fetchUserAddress().then((result) => {
+      console.log(result);
+      if('data' in result ) {
+        setDataAvail(true);
+      }else{
+        notify("You don't have any address.Please add new one");
+      }     
+      setLoading(false);
+    }).catch((error) => {
+      setLoading(false);
+      notify(error);
+    });
+  },[]);
 
-  const [address, setAddress] = useState(initAddressVal);
-  const [addressId, setAddressId] = useState(0);
 
-  function handleClick(e) {
-    setAddressId(e.target.value);
-    console.log(addressId);
-  }
-
-  const getData = async () => {  
-    await UserAddressService.fetchUserAddress(token)
-    .then(res => {  
-      console.log(res)  
-    })  
-    .catch(err => {  
-      console.log(err)  
-    });  
-  }  
-
+ 
 
   return (
     <>
       <Grid item container>
-        <Grid item xs={12} md={12} mt={2}>
-          {/* Page Title */}
-          <Box xs={12} md={12} mb={2}>
-            <h4 className={classes.addressHead} sx={style}>
-              SELECT ADDRESS
-            </h4>
-          </Box>
-          {/* Page Title End */}
-        </Grid>
-
+      <Grid item xs={12} md={12} mt={2}>
+              <Box xs={12} md={12} mb={2}>
+              <h4 className={classes.addressHead} sx={style}>
+                  SELECT ADDRESS
+               </h4>
+              </Box>
+      </Grid>
         <Grid item xs={12} md={12} mt={1}>
-          <hr className="divider"></hr>
-          <Container maxWidth="xl" p={2}>
-            {/* Address box here */}
-            <Box component="span" sx={{ p: 2 }}>
-            <Grid item xs={12} md={12} ml={3}>
-<FormControl component="fieldset">
-  <FormControlLabel
-    value="11"
-    control={<Radio />}
-    label="Home"
-    onClick={handleClick}
-  />
-</FormControl>
-
-<Typography ml={4} component="h3" className={classes.address_text}>
-  123 Demo Address,Nagpur
-</Typography>
-</Grid>
-<hr className="divider"></hr>
-            </Box>
-            {/* Address box end here */}
-
-            <Box component="span" sx={{ p: 4 }}>
+        <Container maxWidth="lg" >
+        <hr></hr>
+        <Box component="span" sx={{ p: 2 }}>
+        {loading ? (
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <CircularProgress
+            size={60}
+            thickness={4}
+            sx={{
+              color: "#3f51b5",
+            }}
+          />
+          </div>
+        ) : (
+          (dataAvail) ? (
+            <h1>data avail</h1>
+          ): (
+            <h1>data not avail</h1>
+          )
+        )}
+        <hr></hr>
+        </Box>
+        {/* Add New Address section */}
+        <Box component="span" sx={{ p: 4 }}>
               <Link to="/new-address">
                 <Typography
                   ml={4}
@@ -100,19 +100,22 @@ function SelectAddress() {
                 </Typography>
               </Link>
             </Box>
-
-            <Box component="span" sx={{ p: 4 }} textAlign="center">
+        {/* End */}
+        {/* Checkout Button */}
+        <Box component="span" sx={{ p: 4 }} textAlign="center">
               <Grid item xs={12} md={12} mt={3}>
                 <Link to="/select-time" >
-                  <Button variant="contained" className={classes.wd_primary_btn-classes.btn_md}>
+                  <Button variant="contained" className={classes.wd_primary_btn}>
                     Continue with this address
                   </Button>
                 </Link>
               </Grid>
-            </Box>
-          </Container>
+        </Box>
+        {/* End Checkout  button */}
+        </Container>
         </Grid>
-      </Grid>
+      </Grid> 
+      {/* End Griud */}
     </>
   );
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
+import authHeader from "./auth-header.service";
 
 const API_URL = "http://18.118.208.14:8080/api/v1/";
-
-
+const token = authHeader();
 
 let axiosConfig = {
   headers: {
@@ -11,20 +11,19 @@ let axiosConfig = {
 };
 
 
-
-const fetchUserAddress = async (token) => {
-    console.log("token2",token);
-  return await axios.get(
+const fetchUserAddress = () => {
+  return axios.get(
     API_URL + "user/address",
     {headers: {
             "Content-type": "Application/json",
-            "Authorization": `${token}`
+            "Authorization": `${token.Authorization}`
             }   
     }
   )
     .then((response) => {
-      console.log(response.data);
         return response.data;
+    }).catch(err => {
+      return {};
     });
 };
 
