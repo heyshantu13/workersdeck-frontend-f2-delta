@@ -50,11 +50,16 @@ const muiStyle = makeStyles({
       },
       address_text:{fontFamily: "Poppins", fontStyle: "normal", fontWeight: "600", fontSize: "21px", lineHeight: "31px", color: "#909090"},
       wd_address_new_text:{
-        fontFamily: "Poppins", fontStyle: "normal", fontWeight: "600", fontSize: "20px", lineHeight: "40px", color: "#3F51B5"
+        fontFamily: "Poppins", fontStyle: "normal", fontWeight: "600", fontSize: "1rem", lineHeight: "25px", color: "#3F51B5",textDecoration:"none"
       },
       btn_md :{
         width: "100%",
         height: "52px",
+    },
+    CheckoutBtn:{
+      background: "#3f51b5",
+      color: "#fff",
+      height: "52px",
     }
 
 });

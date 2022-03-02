@@ -13,19 +13,24 @@ import {
 import { Link } from "react-router-dom";
 import customStyle from "../../assets/mui_style";
 import UserAddressService from "../../services/address-service";
-import { useDispatch, useSelector, } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import {useNavigate } from "react-router-dom";
+
 
 const style = {
   maxWidth: 360,
 };
 
 const SelectAddress = () => {
-
+  let addressResult;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const classes = customStyle();
   const [loading, setLoading] = useState(true);
   const [dataAvail,setDataAvail] = useState(false);
+  const [userAddress, setUserAddress] = useState();
+  const [selectedAddress,setSelectedAddress] = useState();
   const notify = (msg) =>
   toast.error(msg, {
       position: "bottom-center",
@@ -37,23 +42,29 @@ const SelectAddress = () => {
       progress: undefined,
   });
 
-  useEffect(() => {
-    UserAddressService.fetchUserAddress().then((result) => {
-      console.log(result);
-      if('data' in result ) {
-        setDataAvail(true);
-      }else{
-        notify("You don't have any address.Please add new one");
-      }     
-      setLoading(false);
-    }).catch((error) => {
-      setLoading(false);
+  useEffect(async () => {
+    try{
+      addressResult = await UserAddressService.fetchUserAddress();
+        if('data' in addressResult ) {
+          setDataAvail(true);
+          setUserAddress(addressResult.data);
+        }else{
+          notify("You don't have any address.Please add new one");
+        }  
+    }catch(error){
       notify(error);
-    });
-  },[]);
+    }finally{
+      setLoading(false);
+    }
+  },[]); 
 
-
- 
+  const handleAddress = () =>{
+    if(selectedAddress){
+      navigate("/select-time");
+    }else{
+      notify("Please select address first.");
+    }
+  }
 
   return (
     <>
@@ -81,9 +92,25 @@ const SelectAddress = () => {
           </div>
         ) : (
           (dataAvail) ? (
-            <h1>data avail</h1>
+            userAddress.map((address) => (
+              <Grid item xs={12} md={12} ml={3} key={address.id}>
+                <FormControl component="fieldset">
+                    <FormControlLabel
+                      value={address.id}
+                      control={<Radio />}
+                      label={address.type}
+                      onClick={() => setSelectedAddress(address.id)}
+                    />
+                </FormControl>
+                <Typography ml={4} component="h4" className={classes.address_text}>
+                  {address.name}, {address.address}, {address.pin_code}
+                </Typography>
+                </Grid>
+            ))
           ): (
-            <h1>data not avail</h1>
+            <Typography ml={4} component="h4" className={classes.address_text}>
+              No Address Avaialble
+          </Typography>
           )
         )}
         <hr></hr>
@@ -104,11 +131,9 @@ const SelectAddress = () => {
         {/* Checkout Button */}
         <Box component="span" sx={{ p: 4 }} textAlign="center">
               <Grid item xs={12} md={12} mt={3}>
-                <Link to="/select-time" >
-                  <Button variant="contained" className={classes.wd_primary_btn}>
-                    Continue with this address
+                  <Button variant="contained" className={classes.CheckoutBtn} onClick={handleAddress}>
+                    Continue with address
                   </Button>
-                </Link>
               </Grid>
         </Box>
         {/* End Checkout  button */}

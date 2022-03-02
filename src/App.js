@@ -21,7 +21,6 @@ import NotFound from"./pages/NotFound";
 import {useSelector,useDispatch} from "react-redux";
 
 
-
 function App() {
 
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
