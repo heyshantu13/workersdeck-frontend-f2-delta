@@ -26,7 +26,6 @@ const ServiceList = () => {
     const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
     const [visible, setVisible] = useState(false);
     const [loadingId, setLoadingId] = useState({});
-
     const notify = (msg) =>
         toast.error(msg, {
             position: "bottom-center",
@@ -36,18 +35,15 @@ const ServiceList = () => {
             pauseOnHover: false,
             draggable: false,
             progress: undefined,
-        });
-
+    });
     const classes = customStyle();
     const serviceResult = useSelector((state) => state.services.data);
-
     const Item = styled(Paper)(({ theme }) => ({
         ...theme.typography.body2,
         padding: theme.spacing(1),
         textAlign: "center",
         color: theme.palette.text.secondary,
     }));
-
     const handleBooking = async (service, e) => {
         const { id } = e.target;
         if (!isLoggedIn) {

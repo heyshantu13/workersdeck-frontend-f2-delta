@@ -9,6 +9,7 @@ import {
   Radio,
   FormControlLabel,
   CircularProgress,
+  RadioGroup,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import customStyle from "../../assets/mui_style";
@@ -94,14 +95,21 @@ const SelectAddress = () => {
           (dataAvail) ? (
             userAddress.map((address) => (
               <Grid item xs={12} md={12} ml={3} key={address.id}>
-                <FormControl component="fieldset">
-                    <FormControlLabel
+                <FormControl >
+                <RadioGroup
+                        aria-label="addresstype"
+                        defaultValue="home"
+                        name="type"
+                  >
+                     <FormControlLabel
                       value={address.id}
                       control={<Radio />}
                       label={address.type}
                       onClick={() => setSelectedAddress(address.id)}
                     />
-                </FormControl>
+                  </RadioGroup>
+                  </FormControl>
+                   
                   <Typography ml={4} component="h4" className={classes.address_text}>
                     {address.name}, {address.address}, {address.pin_code}
                   </Typography>
@@ -126,7 +134,7 @@ const SelectAddress = () => {
                   + ADD NEW ADDRESS
                 </Typography>
               </Link>
-            </Box>
+        </Box>
         {/* End */}
         {/* Checkout Button */}
         <Box component="span" sx={{ p: 4 }} textAlign="center">

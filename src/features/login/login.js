@@ -74,12 +74,8 @@ const Login = () => {
       dispatch(login({ email, password }))
         .then((response) => {
           if (response.payload.user.status === true) {
+            navigate("/");
             notify(`Welcome Back, ${response.payload.user.data.fullname}`);
-            setTimeout(() => {
-              //history.push("/");
-              navigate("/");
-            }, 100);
-            setBtnloading(false);
           } else {
             alert("Opps! You Entered Incorrect Credentials");
             setBtnloading(false);
