@@ -9,7 +9,12 @@ export const BookService = createAsyncThunk(
         service_id:service.id,
         service_charge: service.service_charge,
         service_name:service.service_name,
-        service_description:service.service_description
+        service_description:service.service_description,
+        address_id:null,
+        booking_time: null,
+        booking_date: null,
+
+
       } ;
     } catch (error) {
       thunkAPI.dispatch(setMessage("Something Went Wrong"));

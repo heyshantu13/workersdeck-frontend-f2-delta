@@ -23,7 +23,6 @@ const style = {
 };
 
 const SelectAddress = () => {
-  let addressResult;
   const navigate = useNavigate();
   const classes = customStyle();
   const [loading, setLoading] = useState(true);
@@ -42,19 +41,19 @@ const SelectAddress = () => {
   });
 
   useEffect(() => {
-    try{
-      addressResult = UserAddressService.fetchUserAddress();
-        if('data' in addressResult ) {
+        UserAddressService.fetchUserAddress().then(response => {
+        if('data' in response ) {
+          console.log(response);
           setDataAvail(true);
-          setUserAddress(addressResult.data);
+          setUserAddress(response.data);
         }else{
           notify("You don't have any address.Please add new one");
         }  
-    }catch(error){
-      notify(error);
-    }finally{
-      setLoading(false);
-    }
+      }).catch(err => {
+        notify(err);
+      }).finally(() => {
+        setLoading(false);
+      })
   },[]); 
 
   const handleAddress = () =>{
