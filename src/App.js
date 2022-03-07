@@ -16,7 +16,7 @@ import SelectTime from "./features/booking/SelectTime";
 import BookingConfirmation from "./features/booking/ValidateBooking";
 import ThankYou from "./features/booking/ThankYou";
 import NewAddress from "./features/booking/addNewAddress";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from"./pages/NotFound";
 import ProtectedOutlet , {LoggedInOutlet} from "./ProtectedOutlet";

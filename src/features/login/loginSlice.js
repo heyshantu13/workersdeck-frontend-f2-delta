@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "../message/messageSlice";
 import AuthService from "../../services/auth.service";
 
-const user = JSON.parse(localStorage.getItem("user"));
 
 export const login = createAsyncThunk(
   "user/signin",
