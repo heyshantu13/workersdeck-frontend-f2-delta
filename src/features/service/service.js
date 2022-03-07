@@ -9,24 +9,25 @@ import {
     Paper,
     Rating,
     Stack,
-    CircularProgress,
 } from "@mui/material/";
 import customStyle from "./style";
-import muistyle from "../../assets/mui_style";
 import { styled } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
 import "./style.module.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { BookService } from "./serviceSlice";
+import Loader from "../../components/Loader";
 
 const ServiceList = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState({
+        loading:false,
+        visibled:false,
+    });
     const [loadingId, setLoadingId] = useState({});
-
     const notify = (msg) =>
         toast.error(msg, {
             position: "bottom-center",
@@ -36,18 +37,15 @@ const ServiceList = () => {
             pauseOnHover: false,
             draggable: false,
             progress: undefined,
-        });
-
+    });
     const classes = customStyle();
     const serviceResult = useSelector((state) => state.services.data);
-
     const Item = styled(Paper)(({ theme }) => ({
         ...theme.typography.body2,
         padding: theme.spacing(1),
         textAlign: "center",
         color: theme.palette.text.secondary,
     }));
-
     const handleBooking = async (service, e) => {
         const { id } = e.target;
         if (!isLoggedIn) {
@@ -73,6 +71,12 @@ const ServiceList = () => {
             }
         }
     };
+
+    const handleViewMore = async (service,e) => {
+        setVisible({
+            loading: true,
+        })
+    }
 
     return (
         <>
@@ -188,9 +192,11 @@ const ServiceList = () => {
                                         >
                                             &#x20B9; {service.service_charge}
                                         </span>
+                                      
                                     </Grid>
                                     {/* Image end */}
                                     <Grid item xs={12} sm={12} md={12} lg={12}>
+                                   
                                         <Button
                                             variant="contained"
                                             className={classes.bookService}
@@ -201,17 +207,17 @@ const ServiceList = () => {
                                             mb={1}
                                         >
                                             {loadingId[service.id] ? (
-                                                <CircularProgress
-                                                    size={30}
-                                                    thickness={8}
-                                                    sx={{
-                                                        color: "#ffffff",
-                                                    }}
-                                                />
+                                                 <Loader size={25} thickness={6} color={"#ffffff"}/>
                                             ) : (
                                                 "Book Service"
                                             )}
                                         </Button>
+                                        <Button variant="outlined" 
+                                        className={classes.viewService} 
+                                        onClick={(e) =>
+                                            handleViewMore(service, e)
+                                        }
+                                        >View Details</Button>
                                     </Grid>
                                     {/* end book button */}
                                 </Grid>
@@ -220,8 +226,13 @@ const ServiceList = () => {
                     ))}
                     {/* End Service Card Here */}
                 </Grid>
-                <Grid item xs={12} sm={12} md={3} lg={3}></Grid>
-                {visible && <h1>This is visible</h1>}
+                <Grid item xs={12} sm={12} md={3} lg={3}>
+                {visible.loading &&  
+                 <Loader size={30} thickness={8} color={"#3F51B5"}/>
+               }
+                {visible.visibled && <h1>This is visible</h1>}
+                </Grid>
+               
             </Grid>
         </>
     );

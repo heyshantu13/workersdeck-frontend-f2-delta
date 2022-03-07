@@ -1,4 +1,4 @@
-export default [
+export const services =  [
     {
       id: 1,
       title: "Painter",

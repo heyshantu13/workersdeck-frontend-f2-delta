@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Grid,
   TextField,
   Button,
   Typography,
-  CircularProgress,
 } from "@mui/material/";
 import { useDispatch } from "react-redux";
 import { login } from "./loginSlice";
 import styles from "../../assets/main.module.css";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
-import muiStyle from "../../assets/mui_style";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../../components/Loader";
+
 
 const Login = () => {
   const classes = customStyle();
   const dispatch = useDispatch();
-  const muistyle = muiStyle();
   const navigate = useNavigate();
   const notify = (msg) =>
     toast.success(msg, {
@@ -74,12 +73,8 @@ const Login = () => {
       dispatch(login({ email, password }))
         .then((response) => {
           if (response.payload.user.status === true) {
+            navigate("/");
             notify(`Welcome Back, ${response.payload.user.data.fullname}`);
-            setTimeout(() => {
-              //history.push("/");
-              navigate("/");
-            }, 100);
-            setBtnloading(false);
           } else {
             alert("Opps! You Entered Incorrect Credentials");
             setBtnloading(false);
@@ -112,8 +107,7 @@ const Login = () => {
   };
 
   const validateEmail = (email) => {
-    const pattern =
-      /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+    const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
     const result = pattern.test(email);
     if (result === false) {
       setValid((prevState) => ({
@@ -217,13 +211,7 @@ const Login = () => {
                 disabled={valid.disableButton}
               >
                 {bntloading ? (
-                  <CircularProgress
-                    size={30}
-                    thickness={6}
-                    sx={{
-                      color: "#ffffff",
-                    }}
-                  />
+                   <Loader size={30} thickness={8} color={"#ffffff"}/>
                 ) : (
                   "Login To Account"
                 )}

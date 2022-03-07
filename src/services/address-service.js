@@ -4,8 +4,8 @@ import authHeader from "./auth-header.service";
 const API_URL = "http://18.118.208.14:8080/api/v1/";
 const token = authHeader();
 
-const fetchUserAddress = () => {
-  return axios.get(
+const fetchUserAddress =  () => {
+  return  axios.get(
     API_URL + "user/address",
     {headers: {
             "Content-type": "Application/json",

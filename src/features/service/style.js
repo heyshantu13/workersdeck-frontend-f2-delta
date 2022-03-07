@@ -83,8 +83,12 @@ const customStyle = makeStyles({
             },
             bookService:{
                 float:"right",
-                marginRight:"2rem",
+                marginRight:"0.8rem",
                 backgroundColor:"#3F51B5",
+            },
+            viewService:{
+                float:"right",
+                marginRight:"1rem",
             }
             
       

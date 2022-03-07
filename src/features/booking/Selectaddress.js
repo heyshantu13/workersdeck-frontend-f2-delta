@@ -9,11 +9,11 @@ import {
   Radio,
   FormControlLabel,
   CircularProgress,
+  RadioGroup,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import customStyle from "../../assets/mui_style";
 import UserAddressService from "../../services/address-service";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {useNavigate } from "react-router-dom";
 
@@ -24,7 +24,6 @@ const style = {
 
 const SelectAddress = () => {
   let addressResult;
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = customStyle();
   const [loading, setLoading] = useState(true);
@@ -42,9 +41,9 @@ const SelectAddress = () => {
       progress: undefined,
   });
 
-  useEffect(async () => {
+  useEffect(() => {
     try{
-      addressResult = await UserAddressService.fetchUserAddress();
+      addressResult = UserAddressService.fetchUserAddress();
         if('data' in addressResult ) {
           setDataAvail(true);
           setUserAddress(addressResult.data);
@@ -94,14 +93,21 @@ const SelectAddress = () => {
           (dataAvail) ? (
             userAddress.map((address) => (
               <Grid item xs={12} md={12} ml={3} key={address.id}>
-                <FormControl component="fieldset">
-                    <FormControlLabel
+                <FormControl >
+                <RadioGroup
+                        aria-label="addresstype"
+                        defaultValue="home"
+                        name="type"
+                  >
+                     <FormControlLabel
                       value={address.id}
                       control={<Radio />}
                       label={address.type}
                       onClick={() => setSelectedAddress(address.id)}
                     />
-                </FormControl>
+                  </RadioGroup>
+                  </FormControl>
+                   
                   <Typography ml={4} component="h4" className={classes.address_text}>
                     {address.name}, {address.address}, {address.pin_code}
                   </Typography>
@@ -126,7 +132,7 @@ const SelectAddress = () => {
                   + ADD NEW ADDRESS
                 </Typography>
               </Link>
-            </Box>
+        </Box>
         {/* End */}
         {/* Checkout Button */}
         <Box component="span" sx={{ p: 4 }} textAlign="center">
