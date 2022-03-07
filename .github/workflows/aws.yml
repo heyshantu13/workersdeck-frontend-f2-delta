@@ -30,8 +30,8 @@ jobs:
       with:
         args: --acl public-read --delete
       env:
-        AWS_S3_BUCKET: workersdeck-fe
-        AWS_ACCESS_KEY_ID: AKIA6NP4DNY6IH7DLDUP
-        AWS_SECRET_ACCESS_KEY: 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
-        AWS_REGION: us-east-2
-        SOURCE_DIR: "build"
+        AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET_NAME }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        SOURCE_DIR: ${{ secrets.SOURCE_DIR }}
