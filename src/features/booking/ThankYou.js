@@ -1,4 +1,4 @@
-import React, from "react";
+import React from "react";
 import "./style.css";
 import { Box, Grid } from "@mui/material";
 import customStyle from "./style";
