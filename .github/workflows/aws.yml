@@ -1,23 +1,35 @@
-name: Deploy Workers Deck
-
+name: React Deployment
 on:
   push:
     branches:
-    - master
-
+      - pipeline
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x]
+        
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
       with:
-        aws-access-key-id: AKIA6NP4DNY6OJ7DMB4D
-        aws-secret-access-key: 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
-        aws-region: us-east-2
-
-    - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./public/ s3://workersdeck-fe --delete
+        node-version: ${{ matrix.node-version }}
+    - name: Yarn Install
+      run: |
+        yarn install
+    - name: Staging Build
+      run: |
+        yarn build
+    - name: Deploy to S3
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --delete
+      env:
+        AWS_S3_BUCKET: workersdeck-fe
+        AWS_ACCESS_KEY_ID: AKIA6NP4DNY6OJ7DMB4D
+        AWS_SECRET_ACCESS_KEY: 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
+        AWS_REGION: us-east-2
+        SOURCE_DIR: "build"
