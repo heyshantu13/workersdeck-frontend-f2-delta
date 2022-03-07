@@ -1,5 +1,5 @@
-env:
-    process.env.CI : false
+env: 
+  CI: false
 name: React Deployment
 on:
   push:
