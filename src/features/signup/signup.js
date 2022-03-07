@@ -9,7 +9,6 @@ import {
 } from "@mui/material/";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
-import muiStyle from "../../assets/mui_style";
 import AuthService from "../../services/auth.service";
 import {useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -40,9 +39,7 @@ const Signup = () => {
       progress: undefined,
     });
 
-  
   const classes = customStyle();
-  const muistyle = muiStyle();
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({

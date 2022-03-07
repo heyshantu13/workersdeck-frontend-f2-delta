@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import "./style.css";
 import MapPicker from "react-google-map-picker";
-import {useNavigate } from "react-router-dom";
 import customStyle from "../../assets/mui_style";
 
 const DefaultLocation = { lat: 10, lng: 106 };
@@ -20,7 +19,6 @@ const DefaultZoom = 10;
 
 function NewAddress() {
   const classes = customStyle();
-  const navigate = useNavigate();
   const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
   const [location, setLocation] = useState(defaultLocation);
   const [zoom, setZoom] = useState(DefaultZoom);

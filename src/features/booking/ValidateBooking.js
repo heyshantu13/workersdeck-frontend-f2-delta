@@ -3,12 +3,10 @@ import {
   Box,
   Grid,
   Button,
-  Container,
-  Typography,
   Card,
   CircularProgress
 } from "@mui/material";
-import { Link } from "react-router-dom";
+
 import "./style.css";
 import customStyle from "./style";
 import {useNavigate } from "react-router-dom";

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, from "react";
 import "./style.css";
-import { Box, Grid, Card, Button, Container, TextField } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import customStyle from "./style";
 import successImg from "../../assets/success.png";
 
@@ -9,7 +9,6 @@ import successImg from "../../assets/success.png";
 
 function ThankYou () {
 
-    const classes = customStyle();
     return(
         <>
          <Grid item container>
@@ -33,7 +32,6 @@ function ThankYou () {
         <h4 className="wd-checkout-text" >
         Your request placed successfully. Booking id is #1234567890. Thank you.
         </h4>
-        center
         </Grid>
        {/*  */}
        

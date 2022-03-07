@@ -14,7 +14,6 @@ import {
 import { Link } from "react-router-dom";
 import customStyle from "../../assets/mui_style";
 import UserAddressService from "../../services/address-service";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {useNavigate } from "react-router-dom";
 
@@ -25,7 +24,6 @@ const style = {
 
 const SelectAddress = () => {
   let addressResult;
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = customStyle();
   const [loading, setLoading] = useState(true);
@@ -43,9 +41,9 @@ const SelectAddress = () => {
       progress: undefined,
   });
 
-  useEffect(async () => {
+  useEffect(() => {
     try{
-      addressResult = await UserAddressService.fetchUserAddress();
+      addressResult = UserAddressService.fetchUserAddress();
         if('data' in addressResult ) {
           setDataAvail(true);
           setUserAddress(addressResult.data);
