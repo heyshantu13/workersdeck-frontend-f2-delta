@@ -15,6 +15,7 @@ import registerBackground from "../../assets/auth_banner.png";
 import muiStyle from "../../assets/mui_style";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../../components/Loader";
 
 const Login = () => {
   const classes = customStyle();
@@ -213,13 +214,7 @@ const Login = () => {
                 disabled={valid.disableButton}
               >
                 {bntloading ? (
-                  <CircularProgress
-                    size={30}
-                    thickness={6}
-                    sx={{
-                      color: "#ffffff",
-                    }}
-                  />
+                   <Loader size={30} thickness={8} color={"#ffffff"}/>
                 ) : (
                   "Login To Account"
                 )}

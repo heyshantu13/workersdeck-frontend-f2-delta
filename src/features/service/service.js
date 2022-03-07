@@ -9,8 +9,6 @@ import {
     Paper,
     Rating,
     Stack,
-    CircularProgress,
-    
 } from "@mui/material/";
 import customStyle from "./style";
 import muistyle from "../../assets/mui_style";
@@ -210,7 +208,7 @@ const ServiceList = () => {
                                             mb={1}
                                         >
                                             {loadingId[service.id] ? (
-                                                 <Loader size={30} thickness={8} color={"#ffffff"}/>
+                                                 <Loader size={25} thickness={6} color={"#ffffff"}/>
                                             ) : (
                                                 "Book Service"
                                             )}
