@@ -1,10 +1,10 @@
 env: 
   CI: false
-name: React Deployment
+name: WorkersDeck Frontend Deployment
 on:
   push:
     branches:
-      - pipeline
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
