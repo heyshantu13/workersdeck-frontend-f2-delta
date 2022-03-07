@@ -1,32 +1,23 @@
-name: s3-deployment-frontend
+name: Deploy Workers Deck
 
 on:
   push:
     branches:
-      - master
+    - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@master
-    - name: Setup Node
-      uses: actions/setup-node@v2
+      uses: actions/checkout@v1
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        node-version: '16.x'
-    - name: Build App
-      run: |
-       yarn && yarn build && ls *
-      env:
-        CI: "" 
-    - name: Copy to S3
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --acl public-read --follow-symlinks --delete
-      env:
-        AWS_S3_BUCKET: workersdeck-fe
-        AWS_ACCESS_KEY_ID: AKIA6NP4DNY6OJ7DMB4D
-        AWS_SECRET_ACCESS_KEY: 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
-        AWS_REGION: us-east-2
-        SOURCE_DIR: ${{ secrets.SOURCE_DIR }}
+        aws-access-key-id: AKIA6NP4DNY6OJ7DMB4D
+        aws-secret-access-key: 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
+        aws-region: us-east-2
+
+    - name: Deploy static site to S3 bucket
+      run: aws s3 sync ./public/ s3://workersdeck-fe --delete
