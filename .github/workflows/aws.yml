@@ -22,10 +22,10 @@ jobs:
     - name: Yarn Install
       run: |
         yarn install
-    - name: Staging Build
+    - name: Build React App
       run: |
         yarn build
-    - name: Deploy to S3
+    - name: Deploy App to S3
       uses: jakejarvis/s3-sync-action@master
       with:
         args: --acl public-read --delete
