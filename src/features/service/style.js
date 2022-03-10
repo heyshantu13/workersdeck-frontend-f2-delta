@@ -93,8 +93,8 @@ const customStyle = makeStyles({
     viewService: {
         float: "right",
         marginRight: "1rem",
-    }
-
+    },
+  
 
 });
 

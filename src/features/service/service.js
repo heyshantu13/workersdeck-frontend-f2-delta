@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { BookService } from "./serviceSlice";
 import Loader from "../../components/Loader";
 import ServiceDetail from "../../components/Card/ServiceDetail";
+import WDServiceList from "../../services/list.service";
 
 const ServiceList = () => {
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ const ServiceList = () => {
         loading:false,
         visibled:false,
     });
+    const [serviceinfo,setServiceinfo] = useState({});
     const [loadingId, setLoadingId] = useState({});
     const notify = (msg) =>
         toast.error(msg, {
@@ -47,6 +49,7 @@ const ServiceList = () => {
         textAlign: "center",
         color: theme.palette.text.secondary,
     }));
+
     const handleBooking = async (service, e) => {
         const { id } = e.target;
         if (!isLoggedIn) {
@@ -77,14 +80,17 @@ const ServiceList = () => {
         setVisible({
             loading: true,
         });
-        setTimeout(() => {
+      WDServiceList.fetchServiceInfo(service.id).then((data) => {
+        setServiceinfo(data);
+      }).catch((err) => {
+        setServiceinfo(err);
+      }).finally(() => {
+        setVisible({
+            loading: false,
+            visibled: true
+        })
+      })
 
-            setVisible({
-                loading: false,
-                visibled: true
-            })
-
-        },2000);
     }
 
     return (
@@ -227,7 +233,7 @@ const ServiceList = () => {
             <Loader size={30} thickness={8} color={"#3F51B5"}/>
     }
         {visible.visibled && 
-            <ServiceDetail />
+             <ServiceDetail data={serviceinfo}/>
         }
     </Grid>
 

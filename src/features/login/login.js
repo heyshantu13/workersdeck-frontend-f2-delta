@@ -11,12 +11,14 @@ import { login } from "./loginSlice";
 import styles from "../../assets/main.module.css";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 
 
 const Login = () => {
+  const location = useLocation();
+  console.log(location,"location");
   const classes = customStyle();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,7 +75,7 @@ const Login = () => {
       dispatch(login({ email, password }))
         .then((response) => {
           if (response.payload.user.status === true) {
-            navigate("/");
+            navigate(-1);
             notify(`Welcome Back, ${response.payload.user.data.fullname}`);
           } else {
             alert("Opps! You Entered Incorrect Credentials");

@@ -6,7 +6,6 @@ export const ServiceListNew = createAsyncThunk(
   "/services/list/",
   async ({ city, pincode,category_id }, thunkAPI) => {
     try {
-      console.log("ServiceList slice ServiceList function");
       const data = await WDServiceList.fetchServiceList(city, pincode,category_id);
       return { data: data };
     } catch (error) {

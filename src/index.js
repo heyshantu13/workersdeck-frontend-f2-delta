@@ -7,6 +7,18 @@ import  {store}  from './app/store';
 import { Provider } from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: "https://ee069fb59d054b899b89421f4fcfd6f9@o1163934.ingest.sentry.io/6252573",
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 let persistor = persistStore(store);
 

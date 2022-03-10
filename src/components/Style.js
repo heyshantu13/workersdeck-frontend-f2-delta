@@ -11,6 +11,16 @@ const useStyles = makeStyles({
     height: 48,
     padding: '0 30px',
   },
+
+  serviceDetailCard: {
+    background: "#FFFFFF",
+    boxShadow: "rgb(65 62 101 / 10%) 0px 4px 4px",
+    borderRadius: "6px",
+    Maxwidth: "100%",
+    marginTop: "4px",
+    padding: "1px",
+},
+
 });
 
 

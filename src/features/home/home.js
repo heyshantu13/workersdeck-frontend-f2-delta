@@ -12,31 +12,23 @@ import {
   CircularProgress,
 } from "@mui/material/";
 import ServiceCard from "../../components/Card/ServiceCard";
-import {services} from "../../constants/services";
+import { services } from "../../constants/services";
 import styles from "./home.module.css";
 import customStyle from "./style";
 import banner from "../../assets/wd_home_banner.jpg";
 import OfferBanner from "../../assets/offerbanner.png";
-import {cities} from "../../constants/cities";
+import { cities } from "../../constants/cities";
 import Footer from "../../components/Footer/Footer";
 import { ServiceListNew } from "./homeSlice";
-import { useDispatch, } from "react-redux";
-import {useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import scrollToTop from "../../util/scrollToTop";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const notify = () => toast.error("No Workers Avaialble Right Now For Your Location ",{
-    position: "bottom-center",
-    autoClose: 4000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: false,
-    progress: undefined,
-    });
+  const classes = customStyle();
 
   const [form, setForm] = useState({
     pincode: "123456",
@@ -44,14 +36,21 @@ const Home = () => {
     category_id: "5",
     pincodeError: "",
   });
-
   const [bntloading, setBtnloading] = useState(false);
 
-  const classes = customStyle();
-
+  const notify = () =>
+    toast.error("No Workers Avaialble Right Now For Your Location ", {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    });
 
   const handleSubmit = (e) => {
-    const {pincode, city,category_id} =  form;
+    const { pincode, city, category_id } = form;
     if (
       form.pincode.length === 0 ||
       form.city.length === 0 ||
@@ -61,17 +60,19 @@ const Home = () => {
     } else {
       e.preventDefault();
       setBtnloading(true);
-      dispatch(ServiceListNew({ city, pincode,category_id })).then((data) => {
-        if(data.payload.data.data.services.length !== 0){
-          navigate("/services");
-        }else{
+      dispatch(ServiceListNew({ city, pincode, category_id }))
+        .then((data) => {
+          if (data.payload.data.data.services.length !== 0) {
+            navigate("/services");
+          } else {
+            notify();
+            setBtnloading(false);
+          }
+        })
+        .catch((err) => {
           notify();
           setBtnloading(false);
-        }
-      }).catch(err => {
-        notify();
-        setBtnloading(false);
-      })
+        });
     }
   };
 
@@ -83,14 +84,6 @@ const Home = () => {
     }));
   };
 
-  const scrollToTop = () =>{
-    window.scrollTo({
-      top: 0, 
-      behavior: 'smooth'
-      /* you can also use 'auto' behaviour
-         in place of 'smooth' */
-    });
-  };
 
   return (
     <>
@@ -137,7 +130,11 @@ const Home = () => {
                     required
                   >
                     {cities.map((cityObj) => (
-                      <MenuItem value={cityObj.name} key={cityObj.id} selected={(cityObj.name === "Nagpur") ? true:false}>
+                      <MenuItem
+                        value={cityObj.name}
+                        key={cityObj.id}
+                        selected={cityObj.name === "Nagpur" ? true : false}
+                      >
                         {" "}
                         {cityObj.name}
                       </MenuItem>
@@ -161,7 +158,11 @@ const Home = () => {
                     required
                   >
                     {services.map((serviceObj) => (
-                      <MenuItem value={serviceObj.id} key={serviceObj.id} selected={(serviceObj.id === 5) ? true:false}>
+                      <MenuItem
+                        value={serviceObj.id}
+                        key={serviceObj.id}
+                        selected={serviceObj.id === 5 ? true : false}
+                      >
                         {serviceObj.title}
                       </MenuItem>
                     ))}
@@ -220,9 +221,19 @@ const Home = () => {
           <Grid item>
             <Card className={classes.wd_service_card}>
               <Grid container key={1}>
-                {services.map((serviceObj) => <Grid item xs={12} sm={12} md={2} lg={2} ml={3} key={serviceObj.id}>
-        <ServiceCard {...serviceObj} />
-      </Grid>)}
+                {services.map((serviceObj) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={2}
+                    lg={2}
+                    ml={3}
+                    key={serviceObj.id}
+                  >
+                    <ServiceCard {...serviceObj} />
+                  </Grid>
+                ))}
               </Grid>
             </Card>
           </Grid>
@@ -238,7 +249,9 @@ const Home = () => {
                 </h3>
                 <h4 className={classes.offetTextTwo}>AND GET FLAT 10% OFF</h4>
                 <Box textAlign="center">
-                  <Button className={classes.bookNowBtn} onClick={scrollToTop}>BOOK NOW</Button>
+                  <Button className={classes.bookNowBtn} onClick={scrollToTop}>
+                    BOOK NOW
+                  </Button>
                 </Box>
               </Grid>
               <Grid sm={12} xs={12} md={4} lg={4} item>
