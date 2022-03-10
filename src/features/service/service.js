@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { BookService } from "./serviceSlice";
 import Loader from "../../components/Loader";
+import ServiceDetail from "../../components/Card/ServiceDetail";
 
 const ServiceList = () => {
     const navigate = useNavigate();
@@ -75,165 +76,165 @@ const ServiceList = () => {
     const handleViewMore = async (service,e) => {
         setVisible({
             loading: true,
-        })
+        });
+        setTimeout(() => {
+
+            setVisible({
+                loading: false,
+                visibled: true
+            })
+
+        },2000);
     }
 
     return (
         <>
-            <Grid container>
-                {/* Sub categories */}
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    <Grid item>
-                        <Card lg={12} sm={4} className={classes.ThirdCard}>
-                            <Stack direction="row" spacing={2} mt={2}>
-                                {serviceResult.subcategories.map(
-                                    (subcat, i) => (
-                                        <Item
-                                            spacing={2}
-                                            key={i}
-                                            className={`${
-                                                classes.wdSubcategories
-                                            } ${
-                                                !i
-                                                    ? classes.wdSubcategoriesActive
-                                                    : ""
-                                            }`}
-                                        >
-                                            {subcat.name}
-                                        </Item>
-                                    )
-                                )}
-                            </Stack>
-                        </Card>
-                    </Grid>
-                </Grid>
-                {/* Sub Categories end */}
-                <Grid item xs={12} sm={12} md={7} lg={7}>
-                    {/* Show service Card Here */}
-                    {serviceResult.services.map((service, i) => (
-                        <Container
-                            maxWidth="xl"
-                            className={classes.wd_myprofile_layout}
-                            key={i}
-                        >
-                            <Card
-                                lg={12}
-                                sm={12}
-                                className={classes.ServiceCard}
-                            >
-                                <Grid container>
-                                    {/* Image  */}
-                                    <Grid item xs={12} sm={12} md={5} lg={5}>
-                                        <Box
-                                            component="img"
-                                            mt={3}
-                                            sx={{
-                                                height: 180,
-                                                width: 300,
-                                                maxHeight: { xs: 233, md: 182 },
-                                                maxWidth: { xs: 350, md: 300 },
-                                                marginLeft: "2rem",
-                                            }}
-                                            src={service.service_image}
-                                        />
-                                    </Grid>
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        sm={12}
-                                        md={7}
-                                        lg={7}
-                                        pr={1}
-                                    >
-                                        <Typography
-                                            varient="h4"
-                                            className={classes.wdServiceCardh1}
-                                            mt={2}
-                                            ml={5}
-                                        >
-                                            {service.service_name}
-                                        </Typography>
-                                        <Typography
-                                            varient="subtitle1"
-                                            className={
-                                                classes.wdServiceCardSubtitle
-                                            }
-                                            mt={1}
-                                            ml={5}
-                                        >
-                                            {service.service_description}{" "}
-                                            Opening Time -{" "}
-                                            <b>{service.start_time}</b> and
-                                            estimate Time -{" "}
-                                            <b>{service.estimate_time}</b> Mins.
-                                        </Typography>
+{/* Sub categories */}
+  <Grid container>
 
-                                        <Grid
-                                            item
-                                            xs={12}
-                                            sm={12}
-                                            md={12}
-                                            lg={12}
-                                        >
-                                            <Rating
-                                                name="read-only"
-                                                value={5}
-                                                readOnly
-                                                className={classes.wdRating}
-                                            />
-                                        </Grid>
-                                        <span
-                                            className={classes.servicePricing}
-                                        >
-                                            &#x20B9; {service.service_charge}
-                                        </span>
-                                      
-                                    </Grid>
-                                    {/* Image end */}
-                                    <Grid item xs={12} sm={12} md={12} lg={12}>
-                                   
-                                        <Button
-                                            variant="contained"
-                                            className={classes.bookService}
-                                            onClick={(e) =>
-                                                handleBooking(service, e)
-                                            }
-                                            id={service.id}
-                                            mb={1}
-                                        >
-                                            {loadingId[service.id] ? (
-                                                 <Loader size={25} thickness={6} color={"#ffffff"}/>
-                                            ) : (
-                                                "Book Service"
-                                            )}
-                                        </Button>
-                                        <Button variant="outlined" 
-                                        className={classes.viewService} 
-                                        onClick={(e) =>
-                                            handleViewMore(service, e)
-                                        }
-                                        >View Details</Button>
-                                    </Grid>
-                                    {/* end book button */}
-                                </Grid>
-                            </Card>
-                        </Container>
-                    ))}
-                    {/* End Service Card Here */}
-                </Grid>
-                <Grid item xs={12} sm={12} md={3} lg={3}>
-                {visible.loading &&  
-                 <Loader size={30} thickness={8} color={"#3F51B5"}/>
-               }
-                {visible.visibled && <h1>This is visible</h1>}
-                </Grid>
-               
-            </Grid>
+    <Grid item  xs={12} sm={12} lg={12} >
+        <Card  className={classes.ThirdCard} style={{overflow: 'auto'}}>
+            <Stack direction="row" spacing={2} m={2} justifyContent="center" >
+                {serviceResult.subcategories.map(
+                    (subcat, i) => (
+                        <Item
+                            spacing={2}
+                            key={i}
+                            className={`${
+                                classes.wdSubcategories
+                            } ${
+                                !i
+                                    ? classes.wdSubcategoriesActive
+                                    : ""
+                            }`}
+                        >
+                            {subcat.name}
+                        </Item>
+                    )
+                )}
+            </Stack>
+        </Card>
+    </Grid>
+
+    <Grid item  xs={12} sm={12} lg={7} >
+    {serviceResult.services.map((service, i) => ( 
+        <Container maxWidth="xl" className={classes.wd_myprofile_layout} key={i}>
+              <Card className={classes.ServiceCard}>
+              
+              <Grid container>
+                  {/* Image  */}
+                  <Grid item xs={12} sm={12} md={5} lg={5}>
+                      <Box
+                          component="img"
+                          mt={3}
+                          sx={{
+                              height: 180,
+                              width: 300,
+                              maxHeight: { xs: 233, md: 182 },
+                              maxWidth: { xs: 350, md: 300 },
+                              marginLeft: "2rem",
+                          }}
+                          src={service.service_image}
+                      />
+                  </Grid>
+                  <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={7}
+                      lg={7}
+                      pr={1}
+                  >
+                      <Typography
+                          varient="h4"
+                          className={classes.wdServiceCardh1}
+                          mt={2}
+                          ml={5}
+                      >
+                          {service.service_name}
+                      </Typography>
+                      <Typography
+                          varient="subtitle1"
+                          className={
+                              classes.wdServiceCardSubtitle
+                          }
+                          mt={1}
+                          ml={5}
+                      >
+                          {service.service_description}{" "}
+                          Opening Time -{" "}
+                          <b>{service.start_time}</b> and
+                          estimate Time -{" "}
+                          <b>{service.estimate_time}</b> Mins.
+                      </Typography>
+
+                      <Grid
+                          item
+                          xs={12}
+                          sm={12}
+                          md={12}
+                          lg={12}
+                      >
+                          <Rating
+                              name="read-only"
+                              value={5}
+                              readOnly
+                              className={classes.wdRating}
+                          />
+                      </Grid>
+                      <span
+                          className={classes.servicePricing}
+                      >
+                          &#x20B9; {service.service_charge}
+                      </span>
+                    
+                  </Grid>
+                  {/* Image end */}
+                  <Grid item xs={12} sm={12} md={12} lg={12}>
+                 
+                      <Button
+                          variant="contained"
+                          className={classes.bookService}
+                          onClick={(e) =>
+                              handleBooking(service, e)
+                          }
+                          id={service.id}
+                          mb={1}
+                      >
+                          {loadingId[service.id] ? (
+                               <Loader size={25} thickness={6} color={"#ffffff"}/>
+                          ) : (
+                              "Book Service"
+                          )}
+                      </Button>
+                      <Button variant="outlined" 
+                      className={classes.viewService} 
+                      onClick={(e) =>
+                          handleViewMore(service, e)
+                      }
+                      >View Details</Button>
+                  </Grid>
+                  {/* end book button */}
+              </Grid>
+              
+              </Card>
+        </Container>
+    ))}
+    </Grid>
+
+    <Grid item xs={12} sm={12} lg={5}>
+    {visible.loading &&  
+            <Loader size={30} thickness={8} color={"#3F51B5"}/>
+    }
+        {visible.visibled && 
+            <ServiceDetail />
+        }
+    </Grid>
+
+</Grid>
+{/* Sub Categories end */}
+
+
         </>
     );
 };
