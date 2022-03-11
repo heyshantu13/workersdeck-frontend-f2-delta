@@ -58,10 +58,10 @@ function NewAddress() {
     }
     try{
       const response = await UserAddressService.storeUserAddress(data);
+      notifySuccess(response.message);
       if(response.status === true){
         navigate(-1);
       }
-      notifySuccess(response.message);
     }catch(e){
       notifySuccess(e);
       console.warn(e);
