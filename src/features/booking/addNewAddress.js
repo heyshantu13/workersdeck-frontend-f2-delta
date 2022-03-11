@@ -59,9 +59,9 @@ function NewAddress() {
     try{
       const response = await UserAddressService.storeUserAddress(data);
       if(response.status === true){
-        notifySuccess(response.message);
         navigate(-1);
       }
+      notifySuccess(response.message);
     }catch(e){
       notifySuccess(e);
       console.warn(e);
