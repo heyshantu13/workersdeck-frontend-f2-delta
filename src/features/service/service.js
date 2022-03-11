@@ -220,7 +220,7 @@ const ServiceList = () => {
                       }
                       >
                               {visible.loading ? 
-            <Loader size={30} thickness={8} color={"#3F51B5"}/>
+            <Loader size={25} thickness={6} color={"#3F51B5"}/>
             : "View Details" }
                          </Button>
                   </Grid>

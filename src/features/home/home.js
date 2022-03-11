@@ -249,7 +249,7 @@ const Home = () => {
                 <h4 className={classes.offetTextTwo}>AND GET FLAT 10% OFF</h4>
                 <Box textAlign="center">
                   <Button className={classes.bookNowBtn} onClick={scrollToTop}>
-                    BOOK NOW
+                    Book Now
                   </Button>
                 </Box>
               </Grid>
