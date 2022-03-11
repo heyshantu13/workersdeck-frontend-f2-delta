@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   RadioGroup,
   Radio,
+  Stack
 } from "@mui/material";
 import "./style.css";
 import MapPicker from "react-google-map-picker";
@@ -134,14 +135,17 @@ function NewAddress() {
                         </FormGroup>
                       </Grid>
                       <Grid sm={12} xs={12} md={10} lg={10} item>
+                      <Stack direction="row" spacing={2} m={1} justifyContent="center"  >
                       <Button
                           variant="contained"
-                          className={`wd-checkout-btn btn-lft`}
                           type="submit"
                           onClick = {(e)=>handleSubmit(e)}
+                          className={classes.CheckoutBtn}
                       >
                         Continue
                       </Button>
+                      </Stack>
+                   
                       </Grid>
                      
                      </form>

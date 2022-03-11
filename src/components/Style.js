@@ -21,6 +21,40 @@ const useStyles = makeStyles({
     padding: "1px",
 },
 
+servicePricing: {
+  fontFamily: "Poppins",
+  fontStyle: "normal",
+  fontWeight: "600",
+  fontSize: "18px",
+  lineHeight: "28px",
+  color: "#000000",
+},
+estimatetime:{
+  fontFamily: "Poppins",
+  fontStyle: "normal",
+  fontWeight: "600",
+  fontSize: "18px",
+  lineHeight: "28px",
+  color: "#000000",
+  marginLeft:"0.8rem",
+
+},
+
+servicetitle: {
+  fontWeight: "600 ",
+  fontSize: "20px ",
+  lineHeight: "42px ",
+  color: "#000000 ",
+  whiteSpace: 'pre-line',
+
+},
+
+bookService2: {
+  backgroundColor: "#3F51B5",
+  float: "right",
+  marginRight: "0.8rem",
+},
+
 });
 
 

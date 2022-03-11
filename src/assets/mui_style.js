@@ -59,7 +59,9 @@ const muiStyle = makeStyles({
     CheckoutBtn:{
       background: "#3f51b5",
       color: "#fff",
-      height: "52px",
+      width:"16rem",
+      borderRadius:"8px",
+      padding: "10px",
     }
 
 });

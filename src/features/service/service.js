@@ -100,7 +100,7 @@ const ServiceList = () => {
 
     <Grid item  xs={12} sm={12} lg={12} >
         <Card  className={classes.ThirdCard} style={{overflow: 'auto'}}>
-            <Stack direction="row" spacing={2} m={2} justifyContent="center" >
+            <Stack direction="row" spacing={2} m={1} justifyContent="center" p={1} >
                 {serviceResult.subcategories.map(
                     (subcat, i) => (
                         <Item
@@ -218,7 +218,11 @@ const ServiceList = () => {
                       onClick={(e) =>
                           handleViewMore(service, e)
                       }
-                      >View Details</Button>
+                      >
+                              {visible.loading ? 
+            <Loader size={30} thickness={8} color={"#3F51B5"}/>
+            : "View Details" }
+                         </Button>
                   </Grid>
                   {/* end book button */}
               </Grid>
@@ -229,11 +233,8 @@ const ServiceList = () => {
     </Grid>
 
     <Grid item xs={12} sm={12} lg={5}>
-    {visible.loading &&  
-            <Loader size={30} thickness={8} color={"#3F51B5"}/>
-    }
         {visible.visibled && 
-             <ServiceDetail data={serviceinfo}/>
+             <ServiceDetail data={serviceinfo} handleBooking={handleBooking} loadingId={loadingId}/>
         }
     </Grid>
 

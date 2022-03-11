@@ -54,7 +54,7 @@ const customStyle = makeStyles({
         fontWeight: "600 ",
         fontSize: "15px ",
         lineHeight: "2rem ",
-        color: "#010101 ",
+        color: "#444444 ",
         whiteSpace: 'pre-line',
       
     },
