@@ -42,8 +42,7 @@ const SelectAddress = () => {
 
   useEffect(() => {
         UserAddressService.fetchUserAddress().then(response => {
-        if('data' in response ) {
-          console.log(response);
+        if(response.data.length > 0) {
           setDataAvail(true);
           setUserAddress(response.data);
         }else{

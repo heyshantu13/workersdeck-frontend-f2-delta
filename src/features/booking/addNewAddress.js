@@ -14,17 +14,25 @@ import {
 import "./style.css";
 import MapPicker from "react-google-map-picker";
 import customStyle from "../../assets/mui_style";
+import Loader from "../../components/Loader";
+import UserAddressService from "../../services/address-service";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+
 
 const DefaultLocation = { lat: 10, lng: 106 };
 const DefaultZoom = 10;
 
 function NewAddress() {
   const classes = customStyle();
+  const navigate = useNavigate();
   const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
   const [location, setLocation] = useState(defaultLocation);
   const [zoom, setZoom] = useState(DefaultZoom);
+  const [bntloading, setBtnloading] = useState(false);
+  const [address, setAddress] = useState({});
 
-  const [address, setAddress] = useState("");
 
   function handleChangeLocation(lat, lng) {
     setLocation({ lat: lat, lng: lng });
@@ -37,19 +45,61 @@ function NewAddress() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddress((prevState) => ({ ...prevState, [name]: value }));
-    console.log(address);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setBtnloading(true);
     e.preventDefault();
-    console.log(e);
+    let data = {
+      name:address.name,
+      address:address.address,
+      type:address.type,
+      pin_code:address.pin_code
+    }
+    try{
+      const response = await UserAddressService.storeUserAddress(data);
+      if(response.status === true){
+        notifySuccess(response.message);
+        navigate(-1);
+      }
+    }catch(e){
+      notifySuccess(e);
+      console.warn(e);
+    }finally{
+      setBtnloading(false);
+    }
+  }
+  
+  const notifyError = (msg) => {
+
+    toast.error(msg, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+});
+
+  }
+  const notifySuccess = (msg) => {
+    toast.success(msg, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+});
   }
   const style = {
     maxWidth: 360,
   };
-  
 
   return (
+
     <>
       <Grid container>
           <Grid item xs={12} md={12} mt={2}>
@@ -85,7 +135,8 @@ function NewAddress() {
                           variant="outlined"
                           className="field-spacing"
                           fullWidth
-                          name="user_address"
+                          name="address"
+                          onChange={handleChange}
                         />
                       </Grid>
 
@@ -97,7 +148,7 @@ function NewAddress() {
                               variant="outlined"
                               className="field-spacing"
                               fullWidth
-                              name="fullname"
+                              name="name"
                               onChange={handleChange}
                           />
                       </Grid>
@@ -110,16 +161,21 @@ function NewAddress() {
                           variant="outlined"
                           className="field-spacing"
                           fullWidth
-                          name="pincode"
+                          name="pin_code"
                           inputProps={{ maxLength: 6 }}
                           onChange={handleChange}
+                          onKeyPress={(event) => {
+                            if (!/[0-9]/.test(event.key)) {
+                              event.preventDefault();
+                            }
+                          }}
                         />
-                      <FormGroup ml={6} className={"wd-radio-lft"}>
+                      <FormGroup ml={6} className={"wd-radio-lft"}  >
                           <RadioGroup
                             aria-label="addresstype"
-                            defaultValue="home"
                             name="type"
                             onChange={handleChange}
+                           
                           >
                             <FormControlLabel
                               value="home"
@@ -142,7 +198,11 @@ function NewAddress() {
                           onClick = {(e)=>handleSubmit(e)}
                           className={classes.CheckoutBtn}
                       >
-                        Continue
+                         {bntloading ? (
+                   <Loader size={30} thickness={8} color={"#ffffff"}/>
+                        ) : (
+                          "Save New Address"
+                        )}
                       </Button>
                       </Stack>
                    

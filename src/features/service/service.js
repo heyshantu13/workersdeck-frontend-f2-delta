@@ -77,11 +77,19 @@ const ServiceList = () => {
     };
 
     const handleViewMore = async (service,e) => {
-        setVisible({
-            loading: true,
-        });
+        const { id } = e.target;
+        console.log(id);
+        setLoadingId((ids) => ({
+            ...ids,
+            [id]: true,
+        }));
+        console.log(loadingId);
       WDServiceList.fetchServiceInfo(service.id).then((data) => {
         setServiceinfo(data);
+        setLoadingId((ids) => ({
+            ...ids,
+            [id]: false,
+        }));
       }).catch((err) => {
         setServiceinfo(err);
       }).finally(() => {
@@ -215,11 +223,12 @@ const ServiceList = () => {
                       </Button>
                       <Button variant="outlined" 
                       className={classes.viewService} 
+                      id={`v_${service.id}`}
                       onClick={(e) =>
                           handleViewMore(service, e)
                       }
                       >
-                              {visible.loading ? 
+                              {loadingId[`v_${service.id}`] ? 
             <Loader size={25} thickness={6} color={"#3F51B5"}/>
             : "View Details" }
                          </Button>
@@ -234,7 +243,7 @@ const ServiceList = () => {
 
     <Grid item xs={12} sm={12} lg={5}>
         {visible.visibled && 
-             <ServiceDetail data={serviceinfo} handleBooking={handleBooking} loadingId={loadingId}/>
+             <ServiceDetail data={serviceinfo} handleBooking={handleBooking} loadingId={loadingId} />
         }
     </Grid>
 
