@@ -5,6 +5,7 @@ import {
   TextField,
   Button,
   Typography,
+  Stack
 } from "@mui/material/";
 import { useDispatch } from "react-redux";
 import { login } from "./loginSlice";
@@ -205,7 +206,8 @@ const Login = () => {
                 Forget Password?
               </Typography>
             </Grid>
-            <Grid sm={6} xs={6} md={6} lg={6} item>
+            <Grid sm={12} xs={12} md={12} lg={12} item>
+             <Stack direction="row" spacing={2} justifyContent="left" >
               <Button
                 variant="contained"
                 className="auth-btn"
@@ -218,6 +220,7 @@ const Login = () => {
                   "Login To Account"
                 )}
               </Button>
+              </Stack>
             </Grid>
           </form>
         </Grid>

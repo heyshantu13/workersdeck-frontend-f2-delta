@@ -5,7 +5,8 @@ import {
   TextField,
   Button,
   Typography,
-  CircularProgress
+  CircularProgress,
+  Stack
 } from "@mui/material/";
 import customStyle from "./style";
 import registerBackground from "../../assets/auth_banner.png";
@@ -271,21 +272,23 @@ const Signup = () => {
                 By Registration you accept TnC
               </Typography>
             </Grid>
-            <Grid sm={12} xs={12} md={8} lg={8} item>
-            <Button
-              variant="contained"
-              className="auth-btn"
-              type="submit"
-              disabled={valid.disableButton}
-              
-            >
-              {bntloading 
-                    ? <CircularProgress  size={30} thickness={6}  sx={{
-                      color: '#ffffff',
-                    }}/> 
-                    : "Register With WorkersDeck"
-                    }
-            </Button>
+            <Grid sm={12} xs={12} md={12} lg={12} item>
+              <Stack direction="row" spacing={2} justifyContent="left" >
+              <Button
+                variant="contained"
+                className="auth-btn"
+                type="submit"
+                disabled={valid.disableButton}
+                
+              >
+                {bntloading 
+                      ? <CircularProgress  size={30} thickness={6}  sx={{
+                        color: '#ffffff',
+                      }}/> 
+                      : "Register With WorkersDeck"
+                      }
+              </Button>
+              </Stack>
             </Grid>
             </form>
           {/* form end */}

@@ -15,7 +15,7 @@ const customStyle = makeStyles({
         borderRadius: '8px'
       },
       wd_service_card:{
-          marginTop: '-2rem',
+          marginTop: '-2.2rem',
           boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04)',
           borderRadius: '12px',
           maxWidth:'96rem',
@@ -41,8 +41,8 @@ const customStyle = makeStyles({
         fontFamily: "Poppins",
         fontStyle: "normal",
         fontWeight: "bold",
-        fontSize: "38px",
-        lineHeight: "45px",
+        fontSize: "28px",
+        lineHeight: "38px",
         marginTop: "24px",
         textAlign: "center",
         letterSpacing: "0.08em",
@@ -54,7 +54,7 @@ const customStyle = makeStyles({
         borderRadius: "8px !important",
         fontStyle: "normal",
         fontWeight: "bold !important",
-        fontSize: "24px !important",
+        fontSize: "16px !important",
         lineHeight: "36px !important",
         width: "355px",
         height: "52px",

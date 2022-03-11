@@ -24,5 +24,10 @@ export const services =  [
       id: 5,
       title: "Cleaning",
       image: "https://i.ibb.co/Dr16h42/broom.png"
+    },
+    {
+      id:6,
+      title:"Storage",
+      image:"https://i.ibb.co/YDgWxnV/warehouse.png"
     }
   ];
