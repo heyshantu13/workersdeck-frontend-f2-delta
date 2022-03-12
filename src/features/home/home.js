@@ -100,6 +100,7 @@ const Home = () => {
                       backgroundSize: "cover",
                       backgroundBlendMode: "overlay",
                       backgroundColor: "rgba(45, 45, 45, 0.55)",
+                      marginTop:"-5px",
                     }}
                   />
           </Grid>

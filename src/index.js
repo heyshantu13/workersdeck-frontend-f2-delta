@@ -9,6 +9,9 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
+import Loader from "./components/Loader";
+import ErrorBoundary from "./Hoc/ErrorBoundary";
+
 
 Sentry.init({
   dsn: "https://ee069fb59d054b899b89421f4fcfd6f9@o1163934.ingest.sentry.io/6252573",
@@ -24,11 +27,13 @@ let persistor = persistStore(store);
 
 ReactDOM.render(
   <React.StrictMode>
+    <ErrorBoundary>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={ <Loader size={30} thickness={8} color={"#3f51b5"}/>} persistor={persistor}>
       <App />
       </PersistGate>
     </Provider>
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );
