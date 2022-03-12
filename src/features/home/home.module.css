@@ -1,0 +1,42 @@
+@media only screen and (min-width:320px)  {
+    .form_position {
+        margin-top: -18rem !important;
+    }
+    .btn_align{
+        justify-content: center !important;
+    }
+    .service_card{
+        width:100% !important;
+    }
+}
+
+@media only screen and (min-width:480px)  {
+    .form_position {
+        margin-top: -18rem !important;
+    }
+    .btn_align{
+        justify-content: center !important;
+    }
+    .service_card{
+        width:100% !important;
+    }
+}
+
+
+@media only screen and (max-width: 640px)  {
+    .form_position {
+        margin-top: -18rem !important;
+  }
+  .btn_align{
+        justify-content: center !important;
+    }
+    .service_card{
+        width:100% !important;
+    }
+}
+
+@media only screen and (min-width:1025px)  {
+    .form_position {
+        margin-top: -8rem !important;
+    }
+}

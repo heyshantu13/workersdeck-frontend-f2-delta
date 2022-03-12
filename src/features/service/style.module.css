@@ -1,0 +1,19 @@
+.wd-subcategories{
+    background: #FFFFFF !important;
+    border: 0.5px solid #000000 !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    width: 8rem !important;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px !important;
+    line-height: 31px !important;
+    color: #000000;
+    margin-left: 42px !important;
+  }
+  
+  .wd-subcategories-active{
+    background: #2D3748 !important;
+    color: #FFFFFF !important;
+  }
