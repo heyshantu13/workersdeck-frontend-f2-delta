@@ -74,10 +74,13 @@ Test Credentials:
 
 We tried to use a completely modern tech stack while testing out some new technologies that we had never used before. This resulted in a fast, performant, and easily-extensible web app that should be fairly future-proof for the coming next several years. We used:
 
-- [MUI React](https://mui.com/)
-- [Axios](https://axios-http.com/docs/intro)
 - [React](https://reactjs.org/)
 - [Redux Toolkit](https://redux.js.org/)
+- [MUI React](https://mui.com/)
+- [Redux Persist](https://www.npmjs.com/package/redux-persist)
+- [Axios](https://axios-http.com/docs/intro)
+- [Sentry](https://sentry.io/)
+- [Github Action](https://github.com/features/actions)
 
 <br/>
 
