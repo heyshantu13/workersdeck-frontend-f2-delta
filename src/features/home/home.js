@@ -9,7 +9,6 @@ import {
   TextField,
   Card,
   Button,
-  CircularProgress,
   Stack
 } from "@mui/material/";
 import ServiceCard from "../../components/Card/ServiceCard";
@@ -24,6 +23,7 @@ import { ServiceListNew } from "./homeSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../../components/Loader";
 import scrollToTop from "../../util/scrollToTop";
 
 const Home = () => {
@@ -189,13 +189,7 @@ const Home = () => {
                   type="submit"
                 >
                   {bntloading ? (
-                    <CircularProgress
-                      size={30}
-                      thickness={6}
-                      sx={{
-                        color: "#ffffff",
-                      }}
-                    />
+                    <Loader size={25} thickness={6} color={"#ffffff"}/>
                   ) : (
                     "GO"
                   )}
