@@ -46,6 +46,14 @@ servicetitle: {
   lineHeight: "42px ",
   color: "#000000 ",
   whiteSpace: 'pre-line',
+},
+
+servicedescription: {
+  fontWeight: "600 ",
+  fontSize: "16px ",
+  lineHeight: "38px ",
+  color: "#141E27 ",
+  whiteSpace: 'pre-line',
 
 },
 
@@ -82,6 +90,28 @@ wd_service_image:{
 FooterCard: {
   background: "#3f51b5",
   borderRadius: "8px ",
+},
+
+how_it_works:{
+  background: '#e9f1ee',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+  borderRadius: '2px',
+  height: '28rem',
+  marginTop:"1px",
+  color:"#000000",
+},
+worker_title:{
+  fontSize: "28px",
+  lineHeight: "1.2em",
+  letterSpacing: "-.06em",
+  fontWeight: "700",
+  color: "#333333",
+  paddingBottom: "40px",
+  position: "relative",
+  textAlign: "center"
+},
+worker_info:{
+  color: "#3F51B5",
 },
 
 homeText:{

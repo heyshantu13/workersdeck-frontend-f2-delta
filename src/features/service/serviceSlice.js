@@ -14,7 +14,6 @@ export const BookService = createAsyncThunk(
         booking_time: null,
         booking_date: null,
 
-
       } ;
     } catch (error) {
       thunkAPI.dispatch(setMessage("Something Went Wrong"));

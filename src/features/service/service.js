@@ -78,12 +78,13 @@ const ServiceList = () => {
 
     const handleViewMore = async (service,e) => {
         const { id } = e.target;
-        console.log(id);
         setLoadingId((ids) => ({
             ...ids,
             [id]: true,
         }));
-        console.log(loadingId);
+        setVisible({
+            visibled: false
+        })
       WDServiceList.fetchServiceInfo(service.id).then((data) => {
         setServiceinfo(data);
         setLoadingId((ids) => ({
