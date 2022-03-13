@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="https://i.ibb.co/YtWf7hG/wdlogo.png" alt="Logo" width="250" height="180" >
+    <img src="https://i.ibb.co/G5p80TS/wdlogo.jpg" alt="Logo" width="250" height="180" >
 </p>
 Worker’s deck is Service on-demand platform to provide quality home services.
 Worker’s deck connects users to working professionals for their home services.
