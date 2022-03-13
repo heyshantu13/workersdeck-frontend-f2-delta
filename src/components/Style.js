@@ -62,9 +62,28 @@ btnText:{
   },
 },
 
+wd_service_title:{
+  fontFamily: "Poppins",
+  fontStyle: "normal",
+  fontWeight: "600",
+  fontSize: "16px",
+  lineHeight: "34px",
+  textAlign: "center",
+  color: "#000000",
+},
+wd_service_image:{
+  height: "84px",
+  width: "84px",
+  display: 'block',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+},
+
 homeText:{
 
-}
+},
+
+
 
 });
 

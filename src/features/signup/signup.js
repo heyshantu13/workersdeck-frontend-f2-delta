@@ -8,7 +8,7 @@ import {
   CircularProgress,
   Stack
 } from "@mui/material/";
-import customStyle from "./style";
+import {Style} from "../";
 import registerBackground from "../../assets/auth_banner.png";
 import AuthService from "../../services/auth.service";
 import {useNavigate } from "react-router-dom";
@@ -40,7 +40,7 @@ const Signup = () => {
       progress: undefined,
     });
 
-  const classes = customStyle();
+  const classes = Style();
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({

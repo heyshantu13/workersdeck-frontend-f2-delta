@@ -8,12 +8,11 @@ import {
   Typography,
   Rating,
 } from "@mui/material";
-import customStyle from "../style";
-import "../../pages/Page.css";
+import {Style} from "../";
 
 
 const CardList = (props) => {
-  const classes = customStyle();
+  const classes = Style();
   const { id, image, title, description, price } = props;
   return (
     <>

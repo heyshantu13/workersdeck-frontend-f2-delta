@@ -11,25 +11,28 @@ import {
   Button,
   Stack
 } from "@mui/material/";
-import ServiceCard from "../../components/Card/ServiceCard";
+import {
+  ServiceCard,
+  Footer,
+  Loader
+} from "../../components";
+
 import { services } from "../../constants/services";
 import styles from "./home.module.css";
-import customStyle from "./style";
+import {Style} from "../";
 import banner from "../../assets/wd_home_5.jpg";
 import OfferBanner from "../../assets/offerbanner.png";
 import { cities } from "../../constants/cities";
-import Footer from "../../components/Footer/Footer";
 import { ServiceListNew } from "./homeSlice";
+import scrollToTop from "../../util/scrollToTop";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import Loader from "../../components/Loader";
-import scrollToTop from "../../util/scrollToTop";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const classes = customStyle();
+  const classes = Style();
 
   const [form, setForm] = useState({
     pincode: "123456",

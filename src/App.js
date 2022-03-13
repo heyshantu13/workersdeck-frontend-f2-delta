@@ -4,24 +4,27 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+
+import {
+  Login,
+  Home,
+  Signup,
+  ServiceList,
+  SelectAddress,
+  SelectTime,
+  BookingConfirmation,
+  ThankYou,
+  NewAddress,
+  Dashboard,
+  AllBookings,
+  ResetPass
+} from "./features";
+import {Header} from "./components/";
+import ProtectedOutlet , {LoggedInOutlet} from "./ProtectedOutlet";
+import NotFound from"./pages/NotFound";
 import { createBrowserHistory } from 'history';
-import Header from "./components/Header/Header";
-import Login from "./features/login/login";
-import Home from "./features/home/home";
-import Signup from "./features/signup/signup";
-import ResetPass from "./features/reset/reset";
-import ServiceList from "./features/service/service";
-import SelectAddress from "./features/booking/Selectaddress";
-import SelectTime from "./features/booking/SelectTime";
-import BookingConfirmation from "./features/booking/ValidateBooking";
-import ThankYou from "./features/booking/ThankYou";
-import NewAddress from "./features/booking/addNewAddress";
-import Dashboard from "./features/dashboard/dashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import NotFound from"./pages/NotFound";
-import ProtectedOutlet , {LoggedInOutlet} from "./ProtectedOutlet";
-
 
 
 function App() {
@@ -46,7 +49,11 @@ function App() {
                 <Route path=":serviceId" element={<ServiceList />} />
             </Route>
             <Route element={<ProtectedOutlet />}>
-              <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route exact path="dashboard" >
+            <Route index={true} element={<Dashboard />}></Route>
+              <Route path="all-bookings" element={<AllBookings />} />
+            </Route>
+           
               <Route exact path="/select-address" element ={<SelectAddress/>} />
               <Route exact path="/new-address" element={<NewAddress />} />
               <Route exact path="/select-time" element={<SelectTime />} />
