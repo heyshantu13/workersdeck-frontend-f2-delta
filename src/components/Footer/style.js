@@ -85,12 +85,13 @@ const customStyle = makeStyles({
   },
   // Footer Style
 
+  
   footer_text_logo: {
-    fontStyle: "normal !important",
-    fontWeight: "800 !important",
-    fontSize: "64px !important",
-    lineHeight: "96px !important",
-    color: "#ffffff !important",
+    fontFamily: "Poppins",
+    fontWeight: 800,
+    fontSize: "38px",
+    lineHeight: "80px",
+    color:"#ffffff",
   },
 
   SecondaryCard: {
