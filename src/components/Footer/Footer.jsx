@@ -12,7 +12,7 @@ function Footer() {
         <Box sx={{ bgcolor: "#2D3748", height: "24vh" }}>
           <Container maxWidth="lg" className="footer-container">
             <Typography variant="h4" className={classes.footer_text_logo}>
-              W.D
+              WORKERS DECK.
             </Typography>
             <Box
               sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}

@@ -79,6 +79,11 @@ wd_service_image:{
   marginRight: 'auto',
 },
 
+FooterCard: {
+  background: "#3f51b5",
+  borderRadius: "8px ",
+},
+
 homeText:{
 
 },
