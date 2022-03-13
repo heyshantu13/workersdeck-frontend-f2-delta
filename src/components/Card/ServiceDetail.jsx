@@ -71,6 +71,36 @@ export default function ServiceDetail(props) {
         </Grid>
         </Stack>
         </Card>
+        <Card  className={custom.serviceDetailCard} style={{overflowY: 'auto'}}>
+            <Stack direction="row" mt={1} justifyContent="center">
+            <Typography varient="h4" className={custom.servicetitle}>Know More About Worker</Typography>  
+            </Stack>
+            <Stack direction="row" mt={2}>
+             
+            <Grid item xs={12} sm={12} lg={8} p={1}>
+            <Typography varient="h6" component="div" className={custom.servicedescription} ml={2}>
+            Provider Name : <span className={custom.worker_info}>{worker.user.fullname}</span>
+            </Typography>
+            <Typography varient="h6" component="div" className={custom.servicedescription} ml={2}>
+            Contact Info : <span className={custom.worker_info}>+91- {worker.user.mobile_no}</span>
+            </Typography>
+            <Typography varient="h6" component="div" className={custom.servicedescription} ml={2}>
+            Contact Email : <span className={custom.worker_info}> {worker.user.email}</span>
+            </Typography>    
+            </Grid> 
+            <Grid item xs={12} sm={12} lg={4} p={1}>
+            <Box
+                          component="img"
+                          sx={{
+                              height: 150,
+                              width: 150,
+                          }}
+                          src={worker.profile_pic}
+                      />
+            </Grid> 
+                       
+            </Stack>
+        </Card>
         </Grid>
 
     </>

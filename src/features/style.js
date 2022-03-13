@@ -142,6 +142,7 @@ const Style = makeStyles({
     borderRadius: '2px',
     height: '415px',
   },
+  
   offetTextOne: {
     fontFamily: "Poppins",
     fontStyle: "normal",

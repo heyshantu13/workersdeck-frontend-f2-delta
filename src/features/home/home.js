@@ -14,7 +14,8 @@ import {
 import {
   ServiceCard,
   Footer,
-  Loader
+  Loader,
+  HowItWorks
 } from "../../components";
 
 import { services } from "../../constants/services";
@@ -237,9 +238,11 @@ const Home = () => {
         </Grid>
         </Grid>
         {/* Services Card End */}
+        <Grid sm={12} xs={12} md={12} lg={12} item >
+        </Grid>
 
         {/* Offer Area */}
-        <Grid sm={12} xs={12} md={12} lg={12} item mt={1}>
+        <Grid sm={12} xs={12} md={12} lg={12} item >
           <Card className={classes.wd_offer_card}>
             <Grid item container>
               <Grid sm={12} xs={12} md={8} lg={8} item>
