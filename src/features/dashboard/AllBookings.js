@@ -12,12 +12,12 @@ import {
 } from "@mui/material/";
 
 
-function dashboard() {
+function AllBookings() {
   return (
     <>
     <Grid>
     <Container maxWidth="lg">
-    Dashboard
+    AllBookings
     </Container>
 
     </Grid>
@@ -25,4 +25,4 @@ function dashboard() {
   )
 }
 
-export default dashboard
+export default AllBookings;

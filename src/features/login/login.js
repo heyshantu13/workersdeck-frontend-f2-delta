@@ -7,20 +7,19 @@ import {
   Typography,
   Stack
 } from "@mui/material/";
+import { useNavigate,useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { login } from "./loginSlice";
 import styles from "../../assets/main.module.css";
-import customStyle from "./style";
+import {Style} from "../";
 import registerBackground from "../../assets/auth_banner.png";
-import { useNavigate,useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
-import Loader from "../../components/Loader";
+import {Loader} from "../../components/";
 
 
 const Login = () => {
   const location = useLocation();
-  console.log(location,"location");
-  const classes = customStyle();
+  const classes = Style();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notify = (msg) =>

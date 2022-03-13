@@ -1,19 +1,17 @@
 import React from 'react'
-import style from "../Style";
+import {Style} from "../";
 import {
     Box,
     Grid,
     Button,
     Typography,
     Card,
-    Container,
-    Paper,
     Rating,
     Stack,
 } from "@mui/material/";
 
 export default function ServiceDetail(props) {
-    const custom = style();
+    const custom = Style();
     const {reviews,service,worker} = props.data.data;
     const handleBooking = props.handleBooking;
     

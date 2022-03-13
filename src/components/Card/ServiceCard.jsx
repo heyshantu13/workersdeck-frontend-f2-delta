@@ -1,34 +1,13 @@
 import React from "react";
 import {CardContent,CardMedia,Typography,Button} from "@mui/material/";
-import { makeStyles } from '@mui/styles';
-
-const customStyle = makeStyles({
-
-  wd_service_title:{
-    fontFamily: "Poppins",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: "16px",
-    lineHeight: "34px",
-    textAlign: "center",
-    color: "#000000",
-  },
-  wd_service_image:{
-    height: "84px",
-    width: "84px",
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  }
- 
-});
+import {Style} from "../index";
 
 const ServiceCard = (props) => {
-  const classes = customStyle();
+  const classes = Style();
     const { id, title, image } = props;
     return(
         <>
-        <Button key={id} sx={{ m: 2, display: "block", mt: 8 }} style={{ cursor: 'default' }}>
+        <Button key={id} sx={{ m: 2, display: "block", mt: 6 }} style={{ cursor: 'default' }}>
           <CardMedia className={classes.wd_service_image} image={image} />
           <CardContent>
             <Typography
