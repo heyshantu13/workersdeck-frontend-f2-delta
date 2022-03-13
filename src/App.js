@@ -16,6 +16,7 @@ import SelectTime from "./features/booking/SelectTime";
 import BookingConfirmation from "./features/booking/ValidateBooking";
 import ThankYou from "./features/booking/ThankYou";
 import NewAddress from "./features/booking/addNewAddress";
+import Dashboard from "./features/dashboard/dashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from"./pages/NotFound";
@@ -45,7 +46,7 @@ function App() {
                 <Route path=":serviceId" element={<ServiceList />} />
             </Route>
             <Route element={<ProtectedOutlet />}>
-              <Route exact path="/dashboard" element={<ThankYou />} />
+              <Route exact path="/dashboard" element={<Dashboard />} />
               <Route exact path="/select-address" element ={<SelectAddress/>} />
               <Route exact path="/new-address" element={<NewAddress />} />
               <Route exact path="/select-time" element={<SelectTime />} />

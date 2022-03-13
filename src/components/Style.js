@@ -54,6 +54,17 @@ bookService2: {
   float: "right",
   marginRight: "0.8rem",
 },
+btnText:{
+  textDecoration: "none",
+  color: "black",
+  "&:hover": {
+    color: "#3f51b5",
+  },
+},
+
+homeText:{
+
+}
 
 });
 

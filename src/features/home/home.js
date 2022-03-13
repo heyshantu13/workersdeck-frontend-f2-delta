@@ -15,7 +15,7 @@ import ServiceCard from "../../components/Card/ServiceCard";
 import { services } from "../../constants/services";
 import styles from "./home.module.css";
 import customStyle from "./style";
-import banner from "../../assets/wd_home_banner.jpg";
+import banner from "../../assets/wd_home_5.jpg";
 import OfferBanner from "../../assets/offerbanner.png";
 import { cities } from "../../constants/cities";
 import Footer from "../../components/Footer/Footer";
@@ -101,8 +101,10 @@ const Home = () => {
                       backgroundBlendMode: "overlay",
                       backgroundColor: "rgba(45, 45, 45, 0.55)",
                       marginTop:"-5px",
+                      backgroundAttachment : "fixed",
                     }}
                   />
+                
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <form onSubmit={handleSubmit} className={styles.form_position}>
