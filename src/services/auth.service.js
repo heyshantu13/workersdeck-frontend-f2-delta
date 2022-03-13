@@ -31,6 +31,7 @@ const login = (email, password) => {
 const logout = () => {
   localStorage.clear();
 };
+
 const authService = {
   register,
   login,

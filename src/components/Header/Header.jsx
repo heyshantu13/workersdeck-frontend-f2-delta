@@ -10,6 +10,7 @@ import {
   Button,
   MenuItem,
 } from "@mui/material/";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink,Link, } from "react-router-dom";
@@ -19,6 +20,7 @@ import {useSelector,useDispatch} from "react-redux";
 import {logout} from "../../features/login/loginSlice";
 import { toast } from 'react-toastify';
 import {useNavigate } from "react-router-dom";
+import Customstyle from "../Style";
 
 
 const lightTheme = createTheme({
@@ -38,7 +40,7 @@ const lightTheme = createTheme({
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const custom  = Customstyle();
   const notify = () => toast.success("Logged Out Succesfully",{
     position: "top-right",
     autoClose: 2500,
@@ -85,14 +87,14 @@ const Header = () => {
       <ThemeProvider theme={lightTheme}>
         <AppBar position="sticky" color="primary" style={{boxShadow: "0 12px 34px -11px rgb(65 62 101 / 10%)"}}>
           <Container maxWidth="xl">
-            <Toolbar disableGutters>
+            <Toolbar >
               <Typography
                 variant="h6"
                 noWrap
                 component="div"
                 sx={{ ml: 3, display: { xs: "none", md: "flex" } }}
               >
-                <b className={styles.wd_logo}>W.D.</b>
+                <b className={styles.wd_logo}>WORKERS DECK.</b>
               </Typography>
 
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -156,27 +158,36 @@ const Header = () => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
               >
-                <b className={styles.wd_logo}>W.D.</b>
+                  <b className={styles.wd_logo}>WORKERS DECK.</b>
               </Typography>
               <Box
                 sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
                 className={styles.menu_content}
               >
                   
-                     <Button
+                <Button
                   key={"home"}
                   onClick={handleCloseNavMenu}
-                  sx={{ mr: 2, color: "black", display: "block", mt: 1 }}
+                  sx={{ mr: 2, color: "black", display: "block",}}
                 >
-                  <Link to="/" style={{ textDecoration: "none" , color:'#000000' }}>Home</Link>
-               
+                  <Link to="/" className={custom.btnText}>Home</Link>
+                </Button>
+                <Button
+                  key={"blogs"}
+                  onClick={handleCloseNavMenu}
+                  sx={{ mr: 2, color: "black", display: "block",  }}
+                >
+                  <Link to="/" className={custom.btnText}>Blogs</Link>
+                </Button>
+                <Button
+                  key={"contact"}
+                  onClick={handleCloseNavMenu}
+                  sx={{ mr: 2, color: "black", display: "block",  }}
+                >
+                  <Link to="/" className={custom.btnText}>Contact Us</Link>
                 </Button>
            
-                
-              
-
-                
-                <NavLink to={isLoggedIn ? "/dashboard" : "/login" }  style={{ textDecoration: 'none' }}>
+                <NavLink to={isLoggedIn ? "/dashboard" : "/login" }  className={custom.btnText}>
                 <Button
                   variant="contained"
                   className={`${styles.btn_primary} ${styles.btn_md}`}
@@ -200,10 +211,10 @@ const Header = () => {
              
                 <Button
                   variant="contained"
-                  className={`${styles.btn_secondary} ${styles.btn_md}`}
+                  className={`${styles.btn_secondary}`}
                   onClick ={handleLogout}
                 >
-                    <Typography textAlign="center" >{isLoggedIn ? "Logout" : "Register" }</Typography>
+                    <Typography textAlign="center" ><LogoutIcon/></Typography>
                 </Button>
             
               }
