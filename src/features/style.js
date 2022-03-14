@@ -131,7 +131,7 @@ const Style = makeStyles({
     borderRadius: '8px'
   },
   wd_service_card:{
-      marginTop: '-2.2rem',
+      marginTop: '-7.5rem',
       boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04)',
       borderRadius: '12px',
       maxWidth:'96rem',
