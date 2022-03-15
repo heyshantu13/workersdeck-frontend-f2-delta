@@ -94,6 +94,14 @@ const customStyle = makeStyles({
         float: "right",
         marginRight: "1rem",
     },
+    services_img:{
+        display: "block",
+        height: "180px",
+        width: "300px",
+        marginLeft: "auto",
+        marginRight: "auto",
+       
+      }
   
 
 });

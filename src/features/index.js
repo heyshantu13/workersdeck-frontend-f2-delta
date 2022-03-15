@@ -7,6 +7,7 @@ import BookingConfirmation from "./booking/ValidateBooking";
 
 // Home
 import Home from "./home/home";
+import OfferArea from "./home/OfferArea";
 
 // Auth
 import Login from "./login/login";
@@ -37,4 +38,5 @@ export {
     AllBookings,
     ResetPass,
     Style,
+    OfferArea,
 }

@@ -138,19 +138,13 @@ const ServiceList = () => {
               
               <Grid container>
                   {/* Image  */}
-                  <Grid item xs={12} sm={12} md={5} lg={5}>
-                      <Box
-                          component="img"
-                          mt={3}
-                          sx={{
-                              height: 180,
-                              width: 300,
-                              maxHeight: { xs: 233, md: 182 },
-                              maxWidth: { xs: 350, md: 300 },
-                              marginLeft: "2rem",
-                          }}
-                          src={service.service_image}
+                  <Grid item xs={12} sm={12} md={5} lg={5} mt={3}>
+                      <img
+                      src={service.service_image}
+                      className={classes.services_img}
+                      loading="lazy"
                       />
+                        
                   </Grid>
                   <Grid
                       item
