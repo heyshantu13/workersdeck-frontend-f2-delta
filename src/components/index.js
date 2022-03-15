@@ -1,7 +1,6 @@
 // Header
 import Header from './Header/Header';
 // Cards
-import HowItWorks from "./Card/HowItWorks";
 import ServiceCard from "./Card/ServiceCard";
 import ServiceDetail from "./Card/ServiceDetail";
 import ServiceListCard from "./Card/ServiceListCard";
@@ -15,7 +14,6 @@ import Style from "./Style";
 
 export {
     Header,
-    HowItWorks,
     ServiceCard,
     ServiceDetail,
     ServiceListCard,

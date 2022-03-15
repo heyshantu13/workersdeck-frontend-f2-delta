@@ -15,17 +15,16 @@ import {
   ServiceCard,
   Footer,
   Loader,
-  HowItWorks
 } from "../../components";
 
 import { services } from "../../constants/services";
 import styles from "./home.module.css";
 import {Style} from "../";
+import OfferArea from "./OfferArea";
+import HowItWorks from "./HowItWorks";
 import banner from "../../assets/wd_home_5.jpg";
-import OfferBanner from "../../assets/offerbanner.png";
 import { cities } from "../../constants/cities";
 import { ServiceListNew } from "./homeSlice";
-import scrollToTop from "../../util/scrollToTop";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -240,43 +239,13 @@ const Home = () => {
         {/* Services Card End */}
         <Grid sm={12} xs={12} md={12} lg={12} item >
         </Grid>
-
+       
         {/* Offer Area */}
-        <Grid sm={12} xs={12} md={12} lg={12} item >
-          <Card className={classes.wd_offer_card}>
-            <Grid item container>
-              <Grid sm={12} xs={12} md={8} lg={8} item>
-                <h3 className={classes.offetTextOne}>
-                  BOOK HOME CLEANING SERVICES
-                </h3>
-                <h4 className={classes.offetTextTwo}>AND GET FLAT 10% OFF</h4>
-                <Box textAlign="center">
-                  <Button className={classes.bookNowBtn} onClick={scrollToTop}>
-                    Book Now
-                  </Button>
-                </Box>
-              </Grid>
-              <Grid sm={12} xs={12} md={4} lg={4} item>
-                <Box
-                  component="img"
-                  sx={{
-                    height: 370,
-                    width: 370,
-                    maxHeight: { xs: 455, md: 370 },
-                    maxWidth: { xs: 370, md: 370 },
-                  }}
-                  mt={2}
-                  alt="The house from the offer."
-                  src={OfferBanner}
-                  className="img-box-effect"
-                />
-              </Grid>
-            </Grid>
-          </Card>
-          {/* Left area of banner  */}
-          {/* Left Area End Of Banner */}
-        </Grid>
+        <OfferArea/>
         {/* Offer Area End */}
+         {/* How It Works */}
+         <HowItWorks/>
+        {/* How it works end */}
         <Footer />
       </Grid>
       {/* Home Page end */}

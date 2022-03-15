@@ -195,6 +195,10 @@ const Style = makeStyles({
     loginbutton:{
         backgroundColor:"#3f51b5",
     },
+    wd_how_it_works_card:{
+      bgcolor: '#EEEEEE', Maxheight: '25vh'
+    },
+ 
 
 
   
